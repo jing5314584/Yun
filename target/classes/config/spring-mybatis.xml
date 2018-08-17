@@ -6,10 +6,10 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:/config/mybatis-config.xml"/>
-        <property name="mapperLocations" value="classpath:/com/xiaojuan/mybatis/xml/*.xml" />
+        <property name="mapperLocations" value="classpath:/com/yun/mybatis/xml/*.xml" />
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.xiaojuan.mybatis.mapper" />
+        <property name="basePackage" value="com.yun.mybatis.mapper" />
     </bean>
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />

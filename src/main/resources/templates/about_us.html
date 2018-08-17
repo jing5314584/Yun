@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>花语-关于我们</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="renderer" content="webkit">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="x5-orientation" content="portrait">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,viewport-fit=cover">
+<meta name="renderer" content="webkit">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="x5-orientation" content="portrait">
+
+<link rel="stylesheet"
+	href="http://static.iishang.com/customer/javascript/amaze-2.7.1/css/amazeui.min.css">
+
+
+
+<link rel="stylesheet"
+	href="http://static.iishang.com/customer/css/app.min.2.0.css?v=10006">
+<link rel="stylesheet" href="/css/redeem.css">
+<link rel="stylesheet" href="/css/fightgroup.css" type="text/css"></link>
+<style type="text/css">
+.userFootBar,.footeNavbar {
+	/*padding-bottom: constant(safe-area-inset-bottom) !important;*/
+	padding-bottom: env(safe-area-inset-bottom) !important;
+	height: auto !important;
+	min-height: 45px;
+}
+
+.footeNavbar>div>div>div,.footeNavbar>div>div>div>a>div {
+	height: 45px;
+}
+</style>
+
+<script
+	src="http://static.iishang.com/customer/javascript/jquery.min.js"></script>
+<script src="http://static.iishang.com/customer/javascript/myjs.js"></script>
+
+
+<script
+	src="http://static.iishang.com/customer/javascript/amaze-2.7.1/js/amazeui.min.js"></script>
+<script
+	src="http://static.iishang.com/customer/javascript/other-1.0/jquery.event.drag-1.5.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<script>
+	$.ajaxSetup({
+		xhrFields : {
+			withCredentials : true
+		},
+		crossDomain : true
+	});
+	var api_addr = "http://aishang-mall-rest.iishang.com/";
+
+	function initShare(productName, description, image) {
+		console.log("initShare start");
+		console.log("productName=" + productName);
+		console.log("description=" + description);
+		console.log("image=" + image);
+
+		var isWx = "true";
+		if (isWx == "true") {
+			var imgUrl = 'http://flower2.oss-cn-hangzhou.aliyuncs.com/customer/images/share_logo.png';
+			if (image && image != "") {
+				imgUrl = image;
+			}
+			var shared = {
+				appId : '',
+				timestamp : '',
+				nonceStr : '',
+				signature : '',
+				url : ''
+			};
+			wx.config({
+				debug : false,
+				appId : shared.appId,
+				timestamp : shared.timestamp,
+				nonceStr : shared.nonceStr,
+				signature : shared.signature,
+				jsApiList : [ 'checkJsApi', 'onMenuShareTimeline',
+						'onMenuShareAppMessage', 'onMenuShareQQ',
+						'onMenuShareQZone', 'onMenuShareWeibo' ]
+			});
+			wx.ready(function() {
+
+				var shareData = {
+					title : productName,
+					desc : description,
+					link : shared.url,
+					imgUrl : imgUrl,
+					success : function(res) {
+						console.log(" wx.ready->shareData success");
+						console.log(res);
+					},
+					cancel : function(res) {
+						console.log(" wx.ready->shareData cancel");
+						console.log(res);
+					}
+				};
+
+				wx.onMenuShareAppMessage(shareData);
+
+				wx.onMenuShareTimeline(shareData);
+
+				wx.onMenuShareQQ(shareData);
+
+				wx.onMenuShareQZone(shareData);
+
+				wx.onMenuShareWeibo(shareData);
+			});
+
+			wx.error(function(res) {
+				//                alert("error: " + res.errMsg);
+				console.error("error: " + res.errMsg);
+			});
+		} else {
+			console.log("Not Wechat !!!");
+		}
+		console.log("initShare end");
+	}
+</script>
+
+
+
+
+
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+		var hm = document.createElement("script");
+		hm.src = "//hm.baidu.com/hm.js?c612acf8f71db378d50fd51bf9bd9c23";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+<style>
+[v-cloak] {
+	display: none;
+}
+
+.vison {
+	color: #b3b3b3 !important;
+	margin: 10px 0px;
+	font-size: 12px !important;
+	padding: 1px 10px;
+	border: 1px solid #b4b4b4;
+	display: inline-block;
+	border-radius: 100px;
+	line-height: 24px;
+	height: 25px;
+}
+
+.bg {
+	/* background-image: url(http://static.iishang.com/customer/images/v2/version/bg.png); */
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+}
+
+.content {
+	margin: 12% 8%;
+	margin-top: 5%;
+	padding: 8%;
+	border-radius: 10px;
+	border: solid 1px #e5e3e4;
+	position: relative;
+}
+
+.bg_content {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: absolute;
+	background: #fff;
+	z-index: 1;
+	opacity: 0.6;
+}
+</style>
+</head>
+
+<body>
+	<div id="app" class="am-g common">
+		<div class="am-u-sm-12 bg">
+			<div class="am-u-sm-10 content">
+				<div class="bg_content"></div>
+				<div style="background: transparent;position:relative; z-index: 2">
+					<div class="am-text-center" style="margin:auto; ">
+						<img src="/images/app.jpg" width="150px";>
+					</div>
+					<div class="am-text-center">
+						<span
+							style="font-size: large;color:#333333;padding: 30px;display: inline-block;">
+							花语FlowerLanguage</span>
+						<div style="font-size: 14px;color: #686566">
+							<span>心若简单随意，自有清喜盈心</span> <span>赏花,聆听花语!买花，买一种心情</span> <span>在你生活的地方</span><br>
+							<span>放上一瓶美美的鲜花</span><br> <span>你就能体会那种鲜花可以点亮生活的感觉</span><br>
+						</div>
+						<div style="padding: 40px 10px 10px;font-size: 12px!important;">
+							<!-- <div class="vison">V<span>3.25.4</span></div> -->
+							<br> <span>上海时线实业有限公司</span><br> <span>联系电话：18017253406</span><br>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

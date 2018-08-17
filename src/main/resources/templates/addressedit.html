@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>花语-地址编辑</title>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport"
+	content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<link rel="stylesheet" type="text/css" href="/css/place.css">
+<link rel="stylesheet" type="text/css" href="/css/zfk.css">
+<link rel="stylesheet" type="text/css" href="/css/buy.css">
+<link rel="stylesheet" type="text/css" href="/css/place.css">
+<link rel="stylesheet" type="text/css" href="/css/coupon.css">
+<link rel="stylesheet" type="text/css" href="/css/paychoice.css">
+<link rel="stylesheet" type="text/css" href="/css/weui.css">
+<link rel="stylesheet" href="/css/ydui.css?rev=@@hash"/>
+    <link rel="stylesheet" href="/css/demo.css"/>
+<link rel="stylesheet"
+	href="//static2.flowerplus.cn/Static/css/new_2017/coupon_124.css">
+<link rel="stylesheet"
+	href="https://static2.flowerplus.cn/main_css.html?id=html_mob_new,weui,&amp;_t=2018032903">
+</head>
+
+<body>
+	<div class="page">
+		<div class="module-wrap">
+			<div class="place_out">
+				<input type="hidden" id="address_id1" value="">
+				<div class="place_in borderBottom">
+					<div class="place_name order_cell borderBottom">
+						<div class="order_cell_l">
+							<label>收货人姓名：</label>
+						</div>
+						<div class="order_cell_r">
+							<input type="text" id="name" placeholder="请输入您的姓名">
+						</div>
+					</div>
+					<div class="order_cell borderBottom">
+						<div class="order_cell_l">
+							<label>联系方式：</label>
+						</div>
+						<div class="order_cell_r">
+							<input type="tel" id="mobile" placeholder="请输入手机号">
+						</div>
+					</div>
+					<div class="order_cell borderBottom ssqd" readonly id="J_Address2">
+						<div class="order_cell_l">
+							<label>省市区：</label>
+						</div>
+						<div class="order_cell_r" >
+						<span class="r_state" id="province"></span><span
+								id="city" class="city"></span><span
+								class="r_district" id="district"></span> <u
+								class="jt"></u>
+						</div>
+					</div>
+					<div class="order_cell detail_place borderBottom">
+						<div class="order_cell_l">
+							<label>详细地址：</label>
+						</div>
+						<div class="order_cell_r">
+							<textarea placeholder="请输入详细地址" id="address"></textarea>
+						</div>
+					</div>
+					
+				</div>
+				<button class="save" id="save_address">保存地址</button>
+				<button class="del" id="del_address">删除地址</button>
+			</div>
+			
+		</div>
+	</div>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/util.js"></script>
+<!-- <script src="js/ydui.flexible.js"></script> -->
+ <script type="text/javascript" src="/js/ydui.citys.js"></script>
+<script type="text/javascript" src="/js/ydui.js"></script>
+<script type="text/javascript" src="/js/layer.js"></script>
+<script type="text/javascript">
+var id = GetQueryString("id");
+var province = "";
+var city = "";
+var district = "";
+if(id && id != "0"){
+	$.ajax({
+	    url: "addressDetail",
+	    type: "POST",
+	    data: {
+	    	"id":id,
+	    },
+	    async: false,
+	    success: function (data) {
+	        var t = JSON.parse(data);
+            var userAddress = t.userAddress;
+            province = userAddress.province;
+            city = userAddress.city;
+            district= userAddress.district;
+            $("#province").html(province);
+    		$("#city").html(city);
+    		$("#district").html(district);
+    		$("#name").val(userAddress.consignee);
+    		$("#mobile").val(userAddress.mobile);
+    		$("#address").val(userAddress.address);
+	      
+	    }
+	});
+	
+	$("#save_address").click(
+			function() {
+				var data = {
+						"id":id,
+						"name":$("#name").val(),
+						"mobile":$("#mobile").val(),
+						"address":$("#address").val(),
+						"province": $("#province").text(),
+						"city": $("#city").text(),
+						"district": $("#district").text()
+				};
+				$.ajax({
+				    url: "addressEdit",
+				    type: "POST",
+				    data: data,
+				    async: false,
+				    success: function (data) {
+			            console.log(data);
+			            if(data.rspCode == '000000'){
+			            	window.location.href = document.referrer;
+			            }
+				      
+				    }
+				});
+			});
+}else{
+	$("#del_address").attr("style","display:none;"); 
+	$("#save_address").click(
+			function() {
+				var data = {
+						"name":$("#name").val(),
+						"mobile":$("#mobile").val(),
+						"address":$("#address").val(),
+						"province": $("#province").text(),
+						"city": $("#city").text(),
+						"district": $("#district").text()
+				};
+				$.ajax({
+				    url: "addressSave",
+				    type: "POST",
+				    data: data,
+				    async: false,
+				    success: function (data) {
+				    	if(data.rspCode == '000000'){
+			            	window.location.href = document.referrer;
+			            }
+			            
+				      
+				    }
+				});
+			});
+}
+$("#del_address").click(function(){
+	//询问框
+	  layer.open({
+	    content: '确认要删除吗？'
+	    ,btn: ['确定', '取消']
+	    ,yes: function(index){
+	    	layer.close(index);
+	    	$.ajax({
+			    url: "addressDelete",
+			    type: "POST",
+			    data: {
+			    	"id":id
+			    },
+			    async: false,
+			    success: function (data) {
+			    	if(data.rspCode == '000000'){
+		            	window.location.href = document.referrer;
+		            }
+		            
+			      
+			    }
+			});
+	      
+	    }
+	  });
+			
+});
+!function () {
+	var $target = $('#J_Address2');
+	$target.citySelect({
+		provance: province,
+		city: city,
+		area: district
+	});
+
+	$target.on('click', function (event) {
+		event.stopPropagation();
+		$target.citySelect('open');
+	});
+
+	$target.on('done.ydui.cityselect', function (ret) {
+		
+		$("#province").html(ret.provance);
+		$("#city").html(ret.city);
+		$("#district").html(ret.area);
+		/* $(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area); */
+	});
+}();
+ 
+</script>
+</html>

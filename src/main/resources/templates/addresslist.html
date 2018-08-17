@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>花语-地址列表</title>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport"
+	content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<link rel="stylesheet" type="text/css" href="/css/place.css">
+<link rel="stylesheet" type="text/css" href="/css/zfk.css">
+<link rel="stylesheet" type="text/css" href="/css/buy.css">
+<link rel="stylesheet" type="text/css" href="/css/place.css">
+<link rel="stylesheet" type="text/css" href="/css/coupon.css">
+<link rel="stylesheet" type="text/css" href="/css/paychoice.css">
+<link rel="stylesheet" type="text/css" href="/css/weui.css">
+<link rel="stylesheet"
+	href="//static2.flowerplus.cn/Static/css/new_2017/coupon_124.css">
+<link rel="stylesheet"
+	href="https://static2.flowerplus.cn/main_css.html?id=html_mob_new,weui,&amp;_t=2018032903">
+</head>
+
+<body>
+	<div class="page">
+		<div class="module-wrap">
+			<div class="place_out">
+				<!-- <a href="" class="delivery">
+    			选择代收服务站点
+    			<u class="jt"></u>
+    		</a> -->
+				<!-- 没有地址 -->
+				<!-- <div class="place_no" style="">
+					<p>
+						<img
+							src="//static2.flowerplus.cn/Static/img/new_2017/no_place.png">
+					</p>
+					<p>你还没有添加收货地址哦</p>
+				</div> -->
+				<!-- 有地址 -->
+				<div class="place" style="">
+					<div class="place_in borderBottom place_index" id="addressList">
+
+					</div>
+				</div>
+				<a href="addressedit.html" class="place_add"> <span></span> 添加新地址
+				</a>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/util.js"></script>
+<script type="text/javascript">
+var id = GetQueryString("addressIdx");
+
+
+$.ajax({
+    url: "getAddressList",
+    type: "POST",
+    data: {
+    },
+    async: false,
+    success: function (data) {
+        var t = JSON.parse(data);
+        var addressList = t.addressList;
+        $("#addressList").children().remove();
+        $.each(addressList, function(i, userAddress) {
+        	if(id){
+        		if(id == userAddress.id){
+        			$("#addressList").append("<label class=\"borderBottom flex\" ><p><input type=\"radio\" value=\"\" name=\"coupon\"checked ></p><div class=\"place_con\" onclick=\"ok("+ userAddress.id+ ");\""+
+            				"<p>"+
+            				userAddress.consignee+" <span>"+userAddress.mobile+"</span>"+
+            				"</p>"+
+            				"<p class=\"f12 cgry\">"+userAddress.province+" "+userAddress.city+" "+userAddress.district+" "+userAddress.address+"</p>"+
+            			"</div>"+
+            			"<p>"+
+            				"<a  onclick=\"edit("+ userAddress.id+ ");\" class=\"place_edit\"></a>"+
+            			"</p>"+
+            		"</label>");
+        		}else{
+        			$("#addressList").append("<label class=\"borderBottom flex\" ><p><input type=\"radio\" value=\"\" name=\"coupon\"></p><div class=\"place_con\" onclick=\"ok("+ userAddress.id+ ");\""+
+            				"<p>"+
+            				userAddress.consignee+" <span>"+userAddress.mobile+"</span>"+
+            				"</p>"+
+            				"<p class=\"f12 cgry\">"+userAddress.province+" "+userAddress.city+" "+userAddress.district+" "+userAddress.address+"</p>"+
+            			"</div>"+
+            			"<p>"+
+            				"<a  onclick=\"edit("+ userAddress.id+ ");\" class=\"place_edit\"></a>"+
+            			"</p>"+
+            		"</label>");
+        		}
+        		
+        	}else{
+        		$("#addressList").append("<label class=\"borderBottom flex\" ><div class=\"place_con\""+
+        				"<p>"+
+        				userAddress.consignee+" <span>"+userAddress.mobile+"</span>"+
+        				"</p>"+
+        				"<p class=\"f12 cgry\">"+userAddress.province+" "+userAddress.city+" "+userAddress.district+" "+userAddress.address+"</p>"+
+        			"</div>"+
+        			"<p>"+
+        				"<a  onclick=\"edit("+ userAddress.id+ ");\" class=\"place_edit\"></a>"+
+        			"</p>"+
+        		"</label>");
+        	}
+        	
+        	
+       	
+       });
+    }
+});
+function edit(id){
+	window.location.href="addressedit.html?id="+id;
+}
+function ok(id){
+	var oldParam = GetUrlParam();
+	console.log(oldParam);
+	var newParam = "";
+	 if(oldParam.length > 0){
+		for (var i = 0; i < oldParam.length; i++) {
+			if(i != 0){
+				newParam +="&";
+			}
+			var ite = oldParam[i].split("=");
+			if(ite.length > 1 ){
+				if(ite[0] == "addressIdx"){
+					newParam +="addressIdx="+id;
+				}else{
+					newParam += oldParam[i];
+				}
+			}
+			
+		}
+	}
+	window.location.href="buy.html?"+newParam;
+	
+}
+</script>
+</html>

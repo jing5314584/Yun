@@ -1,0 +1,459 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="花+,花加,flowerplus,鲜花,鲜花订阅">
+<meta name="description"
+	content="一周一花，用鲜花点亮生活,提供98元单品鲜花包月服务、168元混合鲜花包月服务和花艺周边配件、花艺课程服务。">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport"
+	content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+
+
+
+<title>花语-购买</title>
+<script async=""
+	src="//static2.flowerplus.cn/Static/js/sa/sensorsdata.min.js?_t=20171208"
+	charset="UTF-8"></script>
+<script>
+	var _web_base = "https://t.flowerplus.cn/".replace(/^https?:/,
+			window.location.protocol);
+</script>
+<link rel="stylesheet"
+	href="https://static2.flowerplus.cn/main_css.html?id=html_mob_new,weui,&amp;_t=2018032903">
+<script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="/css/zfk.css">
+<link rel="stylesheet" type="text/css" href="/css/buy.css">
+<link rel="stylesheet" type="text/css" href="/css/place.css">
+<link rel="stylesheet" type="text/css" href="/css/coupon.css">
+<link rel="stylesheet" type="text/css" href="/css/paychoice.css">
+<script src="/js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://static2.flowerplus.cn/js/address.b.js?_t=55"></script>
+<script type="text/javascript"
+            src="/js/util.js"></script>
+<style type="text/css">
+.flowertip {
+	position: static !important;
+	overflow-y: hidden !important;
+}
+</style>
+
+</head>
+<body ontouchstart="">
+
+
+
+
+
+	<div class="page">
+
+		<div id="buyWrap">
+			<div class="module-wrap" data-module="buy" style="display: block;">
+			<input type="hidden" value="" id="addressIdx">
+				<div class="delivery_wrap">
+					<div class="delivery_wrap_title title_fontfamily borderBottom">
+						<p class="lh40">配送地址</p>
+					</div>
+					<a href="addresslist.html" class="delivery_wrap" style="padding-left:0">
+						<div class="delivery_wrap_con">
+							<div class="delivery_empty" >请填写您的收货地址</div>
+
+							<div class="select_address">
+								<p>
+									景朋飞&nbsp;&nbsp;15316028637<!-- <span class="border1px s_bj"
+										style="display: none;"></span> -->
+								</p>
+								<p>上海 上海市 宝山区 远洋香奈50单元</p>
+							</div>
+							<u class="jt"></u>
+						</div>
+					</a>
+				</div>
+				<div class="service_time" style="display: none">
+					<div class="service_time_title title_fontfamily lh40">
+						<p class="">
+							首次送达日期: <span id="first_deli_date" class="fr"
+								style="margin-right: 16px;"></span>
+						</p>
+					</div>
+				</div>
+				<!-- 电子祝福卡 -->
+				<!-- 购买的商品 -->
+				<dl class="pro_inform bottom_border">
+					<dt class="normalRow">
+						<div class="title_fontfamily total_num">1件商品</div>
+					</dt>
+					<a href="javascript:;">
+						<dd class="pro_inform_b">
+							<div class="sigle_pro">
+								<p>
+									<img
+										src="/images/15120342614700.jpg"
+										alt="">
+								</p>
+								<div>
+									<p>【新客专享3人团】太阳花闪购</p>
+									<p class="pro_date">非洲菊,5月26日</p>
+								</div>
+								<p class="money">¥24.90</p>
+							</div>
+						</dd>
+					</a>
+
+				</dl>
+				<!-- 商品总额，运费，优惠 -->
+				<div class="price">
+					<dl class="title_fontfamily">
+						<dt>商品总额：</dt>
+						<dd class="f16" id="totalfee"></dd>
+					</dl>
+					<dl class="f12">
+						<dt>运费：</dt>
+						<dd id="postfee">￥0</dd>
+					</dl>
+					<dl class="f12">
+						<dt>优惠/抵扣：</dt>
+						<dd id="discountfee">￥0</dd>
+					</dl>
+				</div>
+				<!-- 选择支付方式 -->
+				<div class="flex choicebuy borderBottom">
+					<div class="choicebuyl">选择支付方式</div>
+					<div class="f12 choicebuyr ellipsis">
+						已选择<span class="choicebuyin">支付宝支付</span>
+					</div>
+					<u class="jt"></u>
+				</div>
+
+				<!-- 优惠券/兑换码 -->
+				<div class="reduce"></div>
+
+				<div class="submit" style="z-index: 2;">
+					<p class="fl_l title_fontfamily">
+						应付金额: <span class="brand_color f16" id="payment"></span>
+					</p>
+					<a href="javascript:;" class="pay_submit fl_l" id="payandsubmit">去支付</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="module-wrap" data-module="place" style="display: none;">
+			<div class="place_out">
+				<!-- <a href="" class="delivery">
+    			选择代收服务站点
+    			<u class="jt"></u>
+    		</a> -->
+				<!-- 没有地址 -->
+				<div class="place_no" style="">
+					<p>
+						<img
+							src="//static2.flowerplus.cn/Static/img/new_2017/no_place.png">
+					</p>
+					<p>你还没有添加收货地址哦</p>
+				</div>
+				<!-- 有地址 -->
+				<div class="place" style="display: none;">
+					<div class="place_in borderBottom place_index"></div>
+				</div>
+				<a href="#add_address" class="place_add"> <span></span> 添加新地址
+				</a>
+			</div>
+			
+			<script type="text/javascript">
+				function up_address(file) {
+					var its = $(file).parent();
+					// $.confirm("确认要修改为默认地址？", function() {
+					selectAddress(its.attr('address-id'));
+					window.location.href = '#';
+					// getAddress();
+					// }, function() {
+
+					// }); 
+				}
+			</script>
+		</div>
+
+		<link rel="stylesheet"
+			href="//static2.flowerplus.cn/Static/css/new_2017/coupon_124.css">
+
+
+
+		
+<script type="text/javascript">
+
+var id = GetQueryString("addressIdx");
+var oldParam = GetUrlParam();
+console.log(oldParam);
+var newParam = "";
+ if(oldParam.length > 0){
+	for (var i = 0; i < oldParam.length; i++) {
+		if(i != 0){
+			newParam +="&";
+		}
+		newParam += oldParam[i];
+	}
+}
+ console.log(newParam);
+if(id && id != "0"){
+	$("#addressIdx").val(id);
+	$(".delivery_empty").hide();
+	$(".select_address").show();
+	$.ajax({
+        url: "addressDetail",
+        type: "POST",
+        data: {
+        	"id":id,
+        },
+        async: false,
+        success: function (data) {
+            var t = JSON.parse(data);
+            var userAddress = t.userAddress;
+            $(".select_address").html("<p>"+
+            		userAddress.consignee+"&nbsp;&nbsp;"+userAddress.mobile+
+		"</p>"+
+		"<p>"+userAddress.province+" "+userAddress.city+" "+userAddress.district+" "+userAddress.address+"</p>");
+        }
+    });
+	$(".delivery_wrap").attr("href","addresslist.html?"+newParam);
+}else{
+	$("#addressIdx").val(0);
+	$(".delivery_empty").show();
+	$(".select_address").hide();
+	$(".delivery_wrap").attr("href","addresslist.html?"+newParam);
+}
+</script>
+			
+	
+		<div class="flick-menu-mask" style="display: none;"></div>
+		<div class="alert-out">
+			<div class="alert paychoice" style="display: none;">
+				<p class="alert_top borderBottom">
+					选择支付方式 <a href="javascript:void(0)" class="close"></a>
+				</p>
+				<!--浏览器-->
+				<label class="borderBottom flex payitem">
+					<div class="payment_t_l flex">
+						<p class="wxtitle"></p>
+						<p class="pay_mode">微信支付</p>
+					</div>
+					<div class="payment_t_r">
+						<input type="radio" value="2" name="payway1" checked="">
+					</div>
+				</label>
+				<form action="/alipay/goalipay_to" method="post" id="goalipay">
+					<input type="hidden" name="out_trade_no" value=""> <input
+						type="hidden" name="subject" value=""> <input
+						type="hidden" name="total_fee" value=""> <input
+						type="hidden" name="show_url" value="http://t.flowerplus.cn/f0">
+					<input type="hidden" name="body" value=""> <input
+						type="hidden" name="id" value="">
+				</form>
+			</div>
+		</div>
+		<div style="display:none" id="bocom_pay_form"></div>
+		<script type="text/javascript">
+			//默认展示支付方式的文字显示
+			var choicemode = $('input[name=payway1]:checked').parents(
+					".payitem").find(".pay_mode").html();
+			$(".choicebuyin").html(choicemode);
+			if (choicemode !== "微信支付") {
+				$(".renew input").removeAttr("checked");
+				$(".renew input").attr('disabled', 'disabled');
+			}
+			$(".choicebuy").click(function(e) {
+				$(".flick-menu-mask,.alerts").show();
+				$(".paychoice").addClass('spec-menu-show');
+			});
+			$(".close").click(function(e) {
+				close()
+			});
+			function close() {
+				$(".paychoice").addClass('spec-menu-hide');
+				setTimeout(function() {
+					$(".flick-menu-mask,.paychoice").hide();
+					$(".paychoice").removeClass('spec-menu-show');
+					$(".paychoice").removeClass('spec-menu-hide');
+				}, 300);
+			}
+			$(".payitem").click(
+					function(e) {
+						var elem = $(this).closest('.payitem');
+						var pay_item = elem.find(".pay_mode");
+						var pay_check = elem.find("input");
+						$(".choicebuyin").html(pay_item.html());
+						pay_check.prop("checked", true);
+						pay_check.parent(".payitem").find("input").removeAttr(
+								"checked");
+						if (pay_item.html() == "微信支付") {
+							$(".renew input").prop("checked", true);
+							$(".renew input").removeAttr('disabled');
+						} else {
+							$(".renew input").removeAttr("checked");
+							$(".renew input").attr('disabled', 'disabled');
+						}
+						close()
+					});
+
+			var pay_id = '', pay_isruning = false, jsApiParameters = "", pay_payment = "", pay_status = "", pay_productid = "", pay_order_type = "";
+			var pay_activity_group = '';
+			var pay_group_oid = '';
+			var pay_product_name = "";
+			var pay_msg = "";
+			var pay_out_id = '';
+		</script>
+		<script type="text/javascript">
+			area = $.address_b.list;
+			
+			   var prepay_id ;
+			   var paySign ;
+			   var appId ;
+			   var timeStamp ;
+			   var nonceStr ;
+			   var packageStr ;
+			   var signType ;
+			var _order_data = data = {
+				_change_flag_ken : 1,
+				// id:50081,
+				skuid : "296",
+				groupid : "",
+				qrcodeid : "",
+				price : 24.90,
+				total_fee : 24.90,
+				payment : 24.90,
+				discount_price : 0,
+				extraBuy : JSON
+						.parse('{"zp":[{"id":"16","goods_sku_id":"111","sku_num":"1","type":"1","rang_type":"0","out_name":"zishou","start_time":"2018-01-31","end_time":"2030-05-01","limit_price":"0.00","customer_type":"1","price":"0.00","remark":"\u65b0\u7528\u6237\u9996\u5355\u9001\u82b1\u74f6","total":"0","saled":"0","is_invalid":"0","is_all_pro":"0","is_specified_pro":"1","is_specific_pro":"0","is_specific_sku":"0","update_time":"2018-05-01 22:47:07","create_time":"2018-05-01 22:47:07","is_once":"1","sku_name":"Ocean\u82b1\u74f6","img":"https:\/\/oss.flowerplus.cn\/product\/20180501\/15251838635711.jpg!sml","old_price":"59"},{"id":"5","goods_sku_id":"81","sku_num":"1","type":"1","rang_type":"0","out_name":"zishou","start_time":"2018-04-25","end_time":"2018-10-01","limit_price":"0.00","customer_type":"2","price":"0.00","remark":"\u590f\u5b63\u4fdd\u9c9c\u82b1\u5361","total":"0","saled":"0","is_invalid":"0","is_all_pro":"0","is_specified_pro":"1","is_specific_pro":"0","is_specific_sku":"0","update_time":"2018-04-26 10:59:13","create_time":"2018-04-26 10:59:13","is_once":"0","sku_name":"\u590f\u5b63\u4fdd\u9c9c\u82b1\u5361","img":"https:\/\/oss.flowerplus.cn\/oss_jpg\/2018-04-03\/15227226313014.jpg!sml","old_price":"1"}],"jjg":[]}'),
+				skuvalue : "非洲菊,5月26日",
+				post_fee : 0,
+				notlike : "",
+				discount : [],
+				items : {},
+				can_coupon : "",
+				can_credit : "",
+				can_couponcode : "",
+				secret_id : "NDO83MBa50081",
+				is_free_zfk : "<$pinfo.function_info.is_free_zfk>" ? "" : ''
+			};
+			var adds = '';
+			var $moduleName = "";
+			var submitLimitTimes = 0;
+			//提交
+			$("#payandsubmit")
+					.bind(
+							"click",
+							function() {
+								var btn = $(this);
+								var orderId = 0;
+								var product = GetQueryString("product");
+								var type = GetQueryString("type");
+								var addressIdx = $("#addressIdx").val();
+								if(addressIdx == 0){
+									popup("请填写地址");
+								}
+
+								var submitLimitTimesDiff = Math
+										.round(((new Date()).getTime() - submitLimitTimes) / 1000);
+								if (submitLimitTimesDiff < 5) {
+									popup('提交过于频繁，'
+											+ (5 - submitLimitTimesDiff)
+											+ '秒后再试');
+									return;
+								}
+								submitLimitTimes = (new Date()).getTime();
+								btn.html("正在创建订单，请稍候").addClass(
+										"buttondisabled");
+								if(type == 3){
+									orderId = GetQueryString("orderid");
+								}
+								$.ajax({
+						            url: "createOrder",
+						            type: "POST",
+						            data: {
+						            	"addressIdx":addressIdx,
+						            	"productIdx":product,
+						            	"type":type,
+						            	"orderId":orderId
+						            },
+						            async: false,
+						            success: function (data) {
+						                console.log("createOrder",data);
+						                if(data.rspCode == '000000'){
+						                	$.ajax({
+									            url: "WxPay",
+									            type: "POST",
+									            data: {
+									            	"orderId":data.data.id
+									            },
+									            async: false,
+									            success: function (data) {
+									            	console.log("WxPay",data);
+									            	appId = data.appid;
+									                paySign = data.sign;
+									                timeStamp = data.timeStamp;
+									                nonceStr = data.nonce_str;
+									                packageStr = "prepay_id="+data.prepay_id;
+									                signType = "HMACSHA256";
+									                onBridgeReady();
+									                
+									            }
+									        });
+							            }
+						            }
+						        });
+							});
+			
+			function onBridgeReady() {
+				alert('开始支付');
+				WeixinJSBridge
+						.invoke(
+								'getBrandWCPayRequest',
+								{
+									"appId" : appId, //公众号名称，由商户传入
+									"paySign" : paySign, //微信签名
+									"timeStamp" : timeStamp, //时间戳，自1970年以来的秒数
+									"nonceStr" : nonceStr, //随机串
+									"package" : packageStr, //预支付交易会话标识
+									"signType" : signType
+								//微信签名方式
+								},
+								function(res) {
+									if (res.err_msg == "get_brand_wcpay_request:ok") {
+										//window.location.replace("index.html");
+										alert('支付成功');
+									} else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+										alert('支付取消');
+									} else if (res.err_msg == "get_brand_wcpay_request:fail") {
+										alert('支付失败');
+									} //使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+								});
+			}
+			function callpay() {
+				if (typeof WeixinJSBridge == "undefined") {
+					if (document.addEventListener) {
+						document.addEventListener('WeixinJSBridgeReady',
+								onBridgeReady, false);
+					} else if (document.attachEvent) {
+						document.attachEvent('WeixinJSBridgeReady',
+								onBridgeReady);
+						document.attachEvent('onWeixinJSBridgeReady',
+								onBridgeReady);
+					}
+				} else {
+					onBridgeReady();
+				}
+			}
+		</script>
+
+
+	</div>
+
+
+
+
+
+</body>
+</html>

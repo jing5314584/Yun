@@ -1,0 +1,156 @@
+
+.cart header .edit_btn{
+	color: #000;
+	border: 0;
+	background: transparent;
+}
+.cart header .finish_btn{
+	color: #fe5478;
+	border: 0;
+	background: transparent;
+}
+.cart .empty{
+	margin-top: 100px;
+    background: url(http://static.iishang.com/customer/images/icons/cart_b.png) 50% 0 no-repeat;
+    text-align: center;
+    padding-top: 80px;
+    background-size: auto 70px;
+}
+.cart .empty .btn{
+	border: 1px solid #fe5478;
+    color: #fe5478;
+    padding: 8px 20px;
+    clear: both;
+    border-radius: 5px;
+}
+.cart .cart_item .am-pad-none-right{
+	padding-right: 0;
+}
+.cart .cus_chk{
+	-webkit-appearance: none;
+  	appearance: none;
+    -webkit-border-radius: 1px;
+  	-moz-border-radius: 1px;
+  	border-radius: 3px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #D8D8D8;
+    width: 15px;
+    height: 15px;
+    border-radius: 0;
+    vertical-align: middle;
+    outline: none;
+    margin-top: 0;
+}
+.cart .cus_chk_checked{
+	background: #fe5478 url('http://static.iishang.com/customer/images/icons/right.png') 50% 50% no-repeat;
+    outline: none;
+    border: 1px solid #fe5478;
+    background-size: auto 60%;
+}
+
+.cart .cus_chk_checked_grey{
+	background: lightgrey url('http://static.iishang.com/customer/images/icons/right.png') 50% 50% no-repeat;
+	outline: none;
+	border: 1px solid lightgrey;
+	background-size: auto 60%;
+}
+
+.cart .cart_item {
+	padding: 10px 0px;
+	border-bottom: 1px solid #F2F2F2;
+}
+.cart .cart_item .cus_chk{
+	margin-top: 28px;
+	border-radius: 3.0px;
+}
+
+.cart .price{
+	color: #fe5478;
+	margin-right: 10px;
+}
+
+.cart .section {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.cart .cart_item  .price{
+	float: left;
+}
+.cart .cart_item .tip{
+	color: #fff;
+	background: #ddd;
+	border-radius: 5px;
+	float: left;
+	clear: both;
+	padding: 1px 5px;
+}
+.cart .cart_item .number{
+	float: right;
+	margin-right: 0;
+	width: 92px;
+	color: #000000;
+}
+.cart .cart_item .price_panel{
+	margin-top: 5px;
+}
+.cart .cart_item .price_panel .number{
+	position: absolute;
+	right: 0rem;
+	bottom: auto;
+}
+.cart .cart_item .number .reduce{
+	border-radius: 3px 0 0 3px;
+	width: 25px;
+	border: 1px solid #999;
+	font-size: 12px;
+	cursor: pointer;
+	line-height: 22px;
+}
+.cart .cart_item .number .plus{
+	border-radius: 0 3px 3px 0;
+	width: 25px;
+	border: 1px solid #999;
+	font-size: 16px;
+	cursor: pointer;
+	line-height: 26px;
+}
+.cart .cart_item .number input{
+	width: 40px;
+	border: 1px solid #999;
+	border-left: 0;
+	border-right: 0;
+	line-height: 26px;
+}
+.cart .cart_item .number .reduce, .cart .cart_item .number .plus, .cart .cart_item .number input{
+	height: 26px;
+	float: left;
+	text-align: center;
+	outline: none;
+	
+}
+.cart .footeNavbar .footerGmDiv{
+	height: 45px;
+	border: 0;
+}
+.cart .footeNavbar{
+	color: #555;
+}
+.cart .cart_item .limit_tip{
+	background: #fafafa;
+	padding: 5px;
+	font-size: 10px;
+	clear: both;
+}
+.limit_split{
+	border-top: 1px solid #f2f2f2;
+}
+.limit_split_btm{
+	border-bottom: 1px solid #f2f2f2;
+}
+.cart .cart_item .left{
+	float: left;
+}
+

@@ -1,0 +1,224 @@
+.order{
+	font-size: 14px;
+}
+.order .menu::-webkit-scrollbar {
+    display: none;
+}
+.order header{
+	overflow: hidden;
+	height: 43px;
+}
+.order header .menu{
+	white-space: nowrap;
+    overflow: scroll;
+    line-height: 24px;
+}
+.order header .menu a.active:after{
+	position: absolute;
+    height: 0;
+    bottom: 0;
+    border: 1px solid #999;
+    width: 30%;
+    content: "";
+    z-index: 1;
+    left: 35%;
+	font-weight: 400;
+}
+.order header .menu a{
+	/*padding-left: 2rem;
+	padding-right: 2rem;*/
+	cursor: pointer;
+	position: relative;
+	margin-top: -2px;
+	width: 85px;
+	text-align: center;
+	    display: inline-block;
+}
+.order header .menu .active{
+	color: #555;
+	text-decoration-color: #555;
+}
+.order .empty{
+	margin-top: 100px;
+    background: url(http://static.iishang.com/customer/images/icons/order_empty.png) 50% 0 no-repeat;
+    text-align: center;
+    padding-top: 75px;
+    background-size: auto 60px;
+}
+.order .cart_item{
+	margin-top: 10px;
+
+}
+.order .cart_item .o_title{
+	font-size: 12px;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+}
+.order .cart_item .o_title_split{
+	border-bottom: 1px solid #F2F2F2;
+}
+.order .cart_item .sku, .order .sku{
+	font-size: 12px;
+}
+.order .o_sub_item{
+	border: 1px solid #F2F2F2;
+	margin-bottom: 10px;
+}
+.order .cart_img{
+	width: 100%;
+	border-radius: 3px;
+}
+.order .split, .order .split2{
+	margin: 10px 0;
+	clear: both;
+	width: 100%;
+	border-bottom: 1px solid #F2F2F2;
+	height: 8px;
+}
+.order .split_space{
+	clear: both;
+	width: 100%;
+	height: 8px;
+}
+.order .block_div{
+	padding-bottom: 5px;
+}
+.order .gray_bg{
+	background: #FAFAFA;
+	padding: 5px 1rem;
+	font-size: 13px;
+	margin-bottom: 10px;
+}
+.order .o_sub_item .block_div{
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+.order .order_split{
+	clear: both;
+	height: 8px;
+	background: #f2f2f2;
+	/*margin: 10px -1rem;*/
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.order_split2{
+	clear: both;
+	height: 8px;
+	background: #f2f2f2;
+	/*margin: 10px -1rem;*/
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.order .cancel{
+	background: #fff;
+	color: #fe5478;
+}
+.order .footeNavbar .footerGmDiv {
+    height: 45px;
+    border: 0;
+    font-size: 14px;
+}
+.order .btn_empty{
+	border: 1px solid #999;
+	color: #999;
+}
+.order .btn_empty_clr5{
+	border: 1px solid #555;
+	color: #555;
+}
+.order .btn_empty_clrb{
+	border: 1px solid #A4BCF0;
+	color: #395596;
+}
+.order .btn_empty, .order .btn_empty_clr5, .order .btn_empty_clrb{
+	background: #fff;
+	padding: 3px 10px;
+	width: auto;
+}
+.order .fixed_div{
+	position: absolute;
+	z-index: 100002;
+	background: #fff;
+	display: block;
+	left: 0;
+	right: 0;
+	top:0;
+}
+.order .logistic{
+	top: 53px;
+}
+.order .logistic .fa-chevron-circle-down:before {
+    content: "\f139";
+}
+.order .fixed_div .split{
+	border-bottom: 1px solid #C2D4FB;
+	margin-left: -1rem;
+	margin-right: -1rem;
+	width: auto;
+}
+.order .logisticZcc{
+	top: 95px;
+}
+.order .fixed_div header, .order .fixed_div section{
+	z-index: 100003;
+	position: relative;
+	background: #fff;
+}
+.order .more a, .order a{
+	cursor: pointer;
+	color: inherit;
+}
+.order .more .fa{
+	font-size: 22px;
+	vertical-align: bottom;
+}
+.clrb2{
+	color: #426eb5;
+}
+.order .up_down{
+	background: #C1D4FB;
+	border-radius: 100%;
+	color: #fff;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+}
+.order .up_down{
+	background: #C1D4FB;
+	border-radius: 100%;
+	color: #fff;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	vertical-align: middle;
+	line-height: 14px;
+}
+.order .fixed_div .up_down .fa-angle-down:before {
+    content: "\f106";
+}
+.order .address select{
+	width: 80px;
+	margin-top: 8px;
+}
+.pintuanwenzi {
+	padding: 1px 4px;
+	background-color: #fe5478;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 13px;
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.v2-split {
+	border-bottom: 1px solid #f2f2f2;
+	height: 1px;
+	z-index: -1;
+	position: relative;
+	margin-top: -12px;
+}
+
+.btm span {
+	padding: 0 10px;
+	background: #fff;
+}

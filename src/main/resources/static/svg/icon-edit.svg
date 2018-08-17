@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2@3x</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="小图标/编辑/编辑/可点击-">
+            <g id="Group-2" transform="translate(0.000000, -1.000000)">
+                <path d="M5.07919733,6.06302619 L2.44916139,7.58485693 C2.22234077,7.71610327 2.21908473,7.82010132 2.43391465,7.96297759 L5.09267951,9.73123411 L14.8487065,9.73123411 C15.8687536,9.73123411 16.6844707,8.91365844 16.6844707,7.89713015 C16.6844707,6.87885679 15.8658566,6.06302619 14.8487065,6.06302619 L5.07919733,6.06302619 Z" id="Rectangle-3" stroke="#999999" stroke-width="0.8" transform="translate(9.231807, 7.897130) rotate(-45.000000) translate(-9.231807, -7.897130) "></path>
+                <rect id="Rectangle" fill="#999999" x="14.2081361" y="7.91386904" width="1" height="7.00000487" rx="0.5"></rect>
+                <path d="M14.6,8.74346707 L7.45443936,2.4 L0.994400475,2.4 C0.671933146,2.4 0.4,2.67402139 0.4,3.00748397 L0.4,15.992516 C0.4,16.3292929 0.671105951,16.6 1.00748397,16.6 L13.992516,16.6 C14.3298802,16.6 14.6,16.3312542 14.6,15.9991153 L14.6,8.74346707 Z" id="Rectangle-2" stroke="#999999" stroke-width="0.8"></path>
+                <rect id="Rectangle" fill="#999999" transform="translate(4.813440, 2.500000) rotate(90.000000) translate(-4.813440, -2.500000) " x="4.31343958" y="-1.00000244" width="1" height="7.00000487" rx="0.5"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,107 @@
+/*
+* @Author: yangyang
+* @Date:   2018-01-22 10:20:32
+* @Last Modified by:   yangyang
+* @Last Modified time: 2018-01-22 15:16:43
+*/
+.choicebuy{
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    background:#fff;
+    position: relative;
+    line-height: 48px;
+    height: 48px;
+    padding-left:16px;
+    padding-right:30px;
+    margin-top: 10px;
+}
+.choicebuy>.choicebuyl{
+	font-family: PingFangSC-Medium;
+	font-size: 14px;
+	color: #333333;
+}
+.choicebuy>.choicebuyr{
+	color: #999;
+	width:100px;
+	text-align:right;
+}
+.renew{
+    padding-left:16px;
+}
+.renew .gomonth{
+	font-family: PingFangSC-Medium;
+	font-size: 14px;
+	color: #111111;
+}
+.paychoice{
+    height:48vh;
+    display:none;
+}
+.alert_top{
+    text-align:center;
+}
+.alert_top .close{
+    background:none;
+
+}
+.alert_top .close:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 18px;
+    height: 1px;
+    background: #000;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+.alert_top .close:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 18px;
+    height: 1px;
+    background: #000;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+.paychoice label {
+    overflow: hidden;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    align-items: center;
+    -webkit-align-items: center;
+    padding: 15px 10px;
+    
+}
+.wet-pay{
+    position:relative;
+}
+.wet-pay:after {
+    content: '推荐';
+    position: absolute;
+    right: -40px;
+    font-size: 10px;
+    text-align: center;
+    color: #FF6688;
+    top: 3px;
+    width: 30px;
+    height: 15px;
+    line-height: 15px;
+    border-radius: 3px;
+    border: 1px solid #FF6688;
+}
+.zfb-pay,.wet-pay{
+    font-family: PingFangSC-Medium;
+    font-size: 14px;
+    color: #333333;
+}
+.payment_t_l .zstitle {
+    width: 20px;
+    height: 20px;
+    background:url(/Static/img/new_2017/zs.svg) no-repeat center;
+    -webkit-background-size:20px;
+    background-size:20px;
+    border-radius: 2px;
+}

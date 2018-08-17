@@ -35,12 +35,38 @@
 		
 		
 <!--  =============================table=================================================================================================================== -->		
-		
-		<table tableName="test" domainObjectName="Test"
+		<table tableName="y_billing_record" domainObjectName="BillingRecord" 
+			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
+			enableSelectByExample="true" selectByExampleQueryId="true"></table> 
+		 <!-- <table tableName="y_v_group_order" domainObjectName="V_GroupOrder" 
+			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
+			enableSelectByExample="true" selectByExampleQueryId="true"></table>  --> 
+		 <!-- <table tableName="y_v_user_wx" domainObjectName="V_UserWx" 
+			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
+			enableSelectByExample="true" selectByExampleQueryId="true"></table> 
+			<table tableName="y_user_wx" domainObjectName="UserWx" 
+			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
+			enableSelectByExample="true" selectByExampleQueryId="true"></table>  -->
+		<!-- <table tableName="y_group_add" domainObjectName="OrderAdd" 
+			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
+			enableSelectByExample="true" selectByExampleQueryId="true"></table> -->
+		  <!-- <table tableName="y_group_order" domainObjectName="Order" 
+			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
+			enableSelectByExample="true" selectByExampleQueryId="true"></table> -->  
+		<!-- <table tableName="y_user_address" domainObjectName="UserAddress" 
+			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
+			enableSelectByExample="true" selectByExampleQueryId="true"></table> -->
+		   <!-- <table tableName="y_user" domainObjectName="User" 
+			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
+			enableSelectByExample="true" selectByExampleQueryId="true"></table>  -->
+		<!-- <table tableName="y_goods" domainObjectName="Goods" 
+			enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" 
+			enableSelectByExample="true" selectByExampleQueryId="true"></table> -->
+		<!-- <table tableName="y_slides" domainObjectName="Slides"
 		 enableCountByExample="true" enableUpdateByExample="true" 
 		 enableDeleteByExample="true" enableSelectByExample="true" 
 		 selectByExampleQueryId="true"> 
-		 </table>
+		 </table> -->
 		<!-- <table tableName="rsd_v_index_product" domainObjectName="V_IndexProduct"
 		 enableCountByExample="true" enableUpdateByExample="true" 
 		 enableDeleteByExample="true" enableSelectByExample="true" 

@@ -1,0 +1,961 @@
+
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="UTF-8">
+        <title>云鲜花</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="Cache-Control" content="no-siteapp"/>
+        
+
+
+
+
+
+
+
+
+
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,viewport-fit=cover">
+<meta name="renderer" content="webkit">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<meta name="x5-orientation" content="portrait">
+
+<link rel="stylesheet" href="css/amazeui.min.css">
+
+
+
+<link rel="stylesheet" href="css/app.min.2.0.css?v=10006">
+<link rel="stylesheet" href="css/redeem.css">
+<link rel="stylesheet" href="css/fightgroup.css" type="text/css"></link>
+<style type="text/css">
+    .userFootBar, .footeNavbar{
+        /*padding-bottom: constant(safe-area-inset-bottom) !important;*/
+        padding-bottom: env(safe-area-inset-bottom) !important;
+        height: auto !important;
+        min-height: 45px;
+    }
+    .footeNavbar > div > div > div, .footeNavbar > div > div > div > a > div{
+        height: 45px;
+    }
+
+</style>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/myjs.js"></script>
+
+
+<script src="js/amazeui.min.js"></script>
+<script src="js/jquery.event.drag-1.5.min.js"></script>
+<script src="js/jweixin-1.0.0.js"></script>
+
+
+<script>
+    $.ajaxSetup({
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true
+    });
+    var api_addr="http://aishang-mall-rest.iishang.com/";
+
+  
+</script>
+
+
+
+
+
+
+
+        <link rel="stylesheet" href="css/common.css?123">
+        <link rel="stylesheet" href="css/cart.css?122">
+        <link rel="stylesheet" href="css/confirm.css?sds">
+        <script type="text/javascript" src="js/vue.min.js"></script>
+        <style type="text/css">
+        
+            .cart .cart_item .disable_div .reduce, .cart .cart_item .disable_div .plus{
+                border-color: #ddd
+            }
+            .cart .cart_item .disable_div input{
+                background-color: white; 
+                color: #ddd;
+                border-color: #ddd;
+                opacity: 1
+            }
+            .cartfoot{
+                height: 45px !important;
+                margin-bottom: 45px;
+                /*bottom: constant(safe-area-inset-bottom) !important;*/
+                bottom: env(safe-area-inset-bottom) !important;
+            }
+           
+        </style>
+    </head>
+    <body>
+        <div class="am-g common cart am-form" id="app">
+          <div v-cloak>
+            
+<div class="am-u-sm-12 subscribe_header" v-if="subscribe.status != 'NONE' && !subscribe.close.head">
+	<div class="am-u-sm-8 am-pad-none">
+		建议关注“爱尚鲜花”享受更多服务
+	</div>
+	<div class="am-u-sm-3 am-pad-none am-text-right">
+		<button class="btn" @click="subscribe.close.content=false" >+ 关注</button>
+	</div>
+	<div class="am-u-sm-1 am-pad-none am-text-right close" @click="subscribe.close.head=true">
+		X
+	</div>
+</div>
+	
+
+            <header>
+                <div class="am-u-sm-2" v-if="!hasBottom">
+                    <img src="http://static.iishang.com/customer/images/icons/back.png" @click="back();">
+                </div>       
+                <div v-if="!hasBottom" class="am-u-sm-8 am-pad-none am-text-center">
+                    购物车
+                </div>
+                <div v-if="hasBottom" style="margin-left: 16.666667%" class="am-u-sm-8 am-pad-none am-text-center">
+                    购物车
+                </div>                
+                <div class="am-u-sm-2 am-text-right">
+                    <button href="javaScript:" class="edit_btn" @click="edit();" v-if="type == 1">
+                        编辑
+                    </button>
+                    <button href="javaScript:" class="finish_btn" @click="finish();" v-if="type == 2">
+                        完成
+                    </button>
+                </div>
+            </header>
+            <section v-if="type == 0">
+                <div class="empty">
+                    您的购物车是空的〜<br/><br/><br/>
+                    <a href="/home/youwx_toHome.do" class="btn" style="float: none">去首页逛逛</a>
+                </div>
+            </section>
+            <section v-if="type == 1 || type == 2">
+                <div v-for="item in items" class="am-u-sm-12 am-pad-none cart_item">
+                    <div class="am-u-sm-12" style="padding-left: 12px">
+                        <div class="am-u-sm-1" style="padding-left: 0px">
+                            <input type="checkbox"  class="cus_chk"
+                            :class="{cus_chk_checked: item.selected}"
+                            :disabled="(item.invalid && type == 1) || (item.status!='NORMAL' && type == 1)"
+                            v-model="item.selected" :id="item.id" @click="selectedItem(item);"/>
+                        </div>
+                        <div class="am-u-sm-11 am-pad-none" style="padding-right: 0px">
+                            <div class="am-u-sm-12 am-pad-none block_div">
+                                <div class="am-u-sm-3 am-pad-none"  @click="showGoodsDetail(item.productId)">
+                                    <img :src="getImageOssStyle(item.imagePath)" class="cart_img" style="width: 100%" />
+                                </div>
+                                <div class="am-u-sm-9">
+                                    <div class="title ellipsis"  @click="showGoodsDetail(item.productId)">{{item.productName}}</div>
+                                    <span class="sku ellipsis"  @click="showGoodsDetail(item.productId)">已选 {{item.propertyName}}</span>
+                                    <div class="price_panel">
+                                        <div v-if="item.status=='NORMAL'" class="price"><span v-if="item.originAmount"><del style="color: #999">{{item.originAmount | currency}} </del><span>&nbsp;</span></span>{{item.singleAmount | currency}}</div>
+                                        <div v-if="item.status == 'SOLD_OUT' " class="tip">无货</div>
+                                        <div v-if="item.status == 'STOP' " class="tip">已失效</div>
+                                        <div v-if="item.status == 'NORMAL' && type == 1" class="number" :class="{disable_div: item.invalid}">
+                                            <div class="reduce" @click="changeCount(item, false);" v-if="item.itemCount > 1 && !item.invalid"> <img src="http://static.iishang.com/customer/images/icons/reduce.png" width="10px" style="margin-top:1px"/> </div>
+                                            <div v-else class="reduce"><img src="http://static.iishang.com/customer/images/icons/reduce_inactive.png" width="10px" style="margin-top:1px"/></div>
+                                            <input type="text" v-model="item.itemCount" v-on:blur="checkInput(item)" :disabled="item.invalid" style="background: #fff;opacity:1" />
+                                            <div class="plus" @click="changeCount(item, true);" v-if=" item.itemCount < item.limitBuy && !item.invalid"> <img src="http://static.iishang.com/customer/images/icons/plus.png" width="10px" style="margin-top: -3px"/> </div>
+                                            <div class="plus" v-else> <img src="http://static.iishang.com/customer/images/icons/plus_inactive.png" width="10px" style="margin-top: -3px"/> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="am-u-sm-12 clearfix block_div" style="height: 10px" v-if="item.limitType != null">&nbsp;</div>
+
+                            <div v-for="(limit,i) in item.limits" v-if="limit.limitType == 'MEMBER' || limit.limitType == 'COUNT' || (limit.limitType == 'PLATFORM' && limit.desc.indexOf('微信端') == -1)">
+                                <div class="am-u-sm-12 am-pad-none limit_tip" :class="{limit_split_btm: i!=item.limits.length-1}"  
+                                >
+                                    <div class="am-u-sm-2 am-pad-none am-text-center" style="width: auto">
+                                        <div class="limitBtn" v-if="limit.limitType == 'PLATFORM'">购买平台</div>
+                                        <div class="limitBtn" v-if="limit.limitType == 'MEMBER'">会员限制</div>
+                                        <div class="limitBtn" v-if="limit.limitType == 'COUNT'">限购</div>
+                                    </div>
+                                    <div class="am-u-sm-8 am-pad-none left" v-if="limit.limitType == 'PLATFORM'">
+                                        只限{{limit.desc}}购买
+                                    </div>
+                                    <div class="am-u-sm-8 am-pad-none left" v-if="limit.limitType != 'PLATFORM'">
+                                        {{limit.desc}}
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <!-- 赠品 -->
+                            <div class="am-u-sm-12 am-pad-none limit_tip" :class="{limit_split: item.limitType == 'PLATFORM' || item.limitType == 'MEMBER' || item.limitType == 'COUNT'}" v-if="item.gifts != null">
+                                <div class="am-u-sm-2 am-pad-none am-text-center" style="width: auto">
+                                    <div class="limitBtn gift">赠品</div>
+                                </div>
+                                <div class="am-u-sm-10 am-u-end am-pad-none left">
+                                    <div v-for="g in item.gifts">
+                                        <div class="am-u-sm-10 am-pad-none" style="padding-top:2px">
+                                            {{g.productName ? g.productName : g.propertyName}}
+                                        </div>
+                                        <div class="am-u-sm-2 am-pad-none am-text-right">
+                                            X {{item.itemCount}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="am-u-sm-12" style="border-top: solid 1px #f2f2f2;padding-top: 12px;padding-bottom: 12px; padding-left: 12px" v-for="resource in item.combinationItemResources">
+
+                        <div class="am-u-sm-1" style="padding-left: 0px">
+                            <input type="checkbox"  class="cus_chk"
+                                   :class="{cus_chk_checked: resource.check,cus_chk_checked_grey:resource.required && resource.check}"
+                                   :disabled="resource.required || (resource.invalid && type==1)"
+                                   v-model="resource.check" :id="resource.id" @click="selectedItem(item,'combination');"/>
+                        </div>
+                        <div class="am-u-sm-11 am-pad-none" style="padding-right: 0px">
+                            <div @click="showGoodsDetail(resource.productId)" class="am-u-sm-3 am-pad-none">
+                                <img :src="getImageOssStyle(resource.image)" class="cart_img" style="width: 100%"/>
+                            </div>
+                            <div class="am-u-sm-9">
+                                <div @click="showGoodsDetail(resource.productId)" class="title ellipsis"><span style="border: solid 1px #fc5275; border-radius: 3px; padding-left: 2px; padding-right: 2px; color: #fc5275; font-size: 12px">加价购</span>&nbsp;{{resource.name}}</div>
+                                <span @click="showGoodsDetail(resource.productId)" class="sku ellipsis">已选 {{resource.property}}</span>
+                                <div class="price_panel">
+                                    <div class="price"><span v-if="resource.amount"><del style="color: #999">{{resource.amount | currency}} </del><span>&nbsp;</span></span>{{resource.discountAmount | currency}}</div>
+                                    <div v-if="resource.stockRemain <= 0 " class="tip">无货</div>
+                                    <div class="number disable_div" style="display: none">
+                                        <div class="reduce"><img src="http://static.iishang.com/customer/images/icons/reduce_inactive.png" width="10px" style="margin-top:1px;"/></div>
+                                        <input type="text" v-model="resource.count" disabled/>
+                                        <div class="plus"> <img src="http://static.iishang.com/customer/images/icons/plus_inactive.png" width="10px" style="margin-top: -3px;"/> </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div v-for="(limit,i) in resource.limits" v-if="limit.limitType == 'MEMBER' || limit.limitType == 'COUNT' || (limit.limitType == 'PLATFORM' && limit.desc.indexOf('微信端') == -1)">
+                                <div class="am-u-sm-12 am-pad-none limit_tip" :class="{limit_split_btm: i!=item.limits.length-1}"  
+                                >
+                                    <div class="am-u-sm-2 am-pad-none am-text-center" style="width: auto">
+                                        <div class="limitBtn" v-if="limit.limitType == 'PLATFORM'">购买平台</div>
+                                        <div class="limitBtn" v-if="limit.limitType == 'MEMBER'">会员限制</div>
+                                        <div class="limitBtn" v-if="limit.limitType == 'COUNT'">限购</div>
+                                    </div>
+                                    <div class="am-u-sm-8 am-pad-none left" v-if="limit.limitType == 'PLATFORM'">
+                                        只限{{limit.desc}}购买
+                                    </div>
+                                    <div class="am-u-sm-8 am-pad-none left" v-if="limit.limitType != 'PLATFORM'">
+                                        {{limit.desc}}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- bottom menu-->
+            <div class="footeNavbar cartfoot" id="footeNavbar" v-if="type != 0 && !hasBottom">
+                <div class="am-u-sm-12 am-pad-none closeTag">
+                    <div class="am-u-sm-2" style="text-align: left;padding-right: 0;padding-left: 12px;">
+                        <input type="checkbox" class="cus_chk" id="all_selected" v-model="all" 
+                        :class="{cus_chk_checked: all}" @click="selectedAll();" style="border-radius: 3px"/>
+                        全选
+                    </div>
+                    <div class="am-u-sm-7 am-pad-none am-text-right">
+                        <div v-if="type == 1" class="no_break">
+                            合计：<span class="price">{{totalPrice | currency}}</span>
+                        </div>
+                    </div>
+                    <button href="javaScript:" class="am-u-sm-3 footerGmDiv" @click="confirm();" v-if="type == 1">
+                        结算
+                    </button>
+                    <button href="javaScript:" class="am-u-sm-3 footerGmDiv" @click="deleteItem();" v-if="type == 2">
+                        删除
+                    </button>
+                </div>
+            </div>
+
+            <div class="footeNavbar cartfoot" id="footeNavbar" v-if="type != 0 && hasBottom">
+                <div class="am-u-sm-12 am-pad-none closeTag">
+                    <div class="am-u-sm-3"  style="text-align: left;padding-right: 0;padding-left: 12px;">
+                        <input type="checkbox" class="cus_chk" id="all_selected" v-model="all" 
+                        :class="{cus_chk_checked: all}" @click="selectedAll();" style="border-radius: 3px"/>
+                        全选
+                    </div>
+                    <div class="am-u-sm-6 am-pad-none am-text-right">
+                        <div v-if="type == 1" class="no_break">
+                            合计：<span class="price">{{totalPrice | currency}}</span>
+                        </div>
+                    </div>
+                    <button href="javaScript:" class="am-u-sm-3 footerGmDiv" @click="confirm();" v-if="type == 1">
+                        结算
+                    </button>
+                    <button href="javaScript:" class="am-u-sm-3 footerGmDiv" @click="deleteItem();" v-if="type == 2">
+                        删除
+                    </button>
+                </div>
+            </div>
+            <div style="height:110px">&nbsp;</div>
+              
+<div class="am-u-sm-12 userFootBar" style="padding-top: 3px;z-index: 200">
+    <div class="am-u-sm-4" @click="selectChange('home')">
+        <div class="am-u-sm-12 img_div" v-if="!selectList.home">
+            <img src="http://static.iishang.com/customer/images/icons/home.png" width="20" height="20"/>
+        </div>
+        <div class="am-u-sm-12 img_div" v-show="selectList.home">
+            <img src="http://static.iishang.com/customer/images/icons/home_select.png" width="20" height="20"/>
+        </div>
+        <div class="am-u-sm-12" style="font-size: 12px; color:#666" v-if="!selectList.home">首页</div>
+        <div class="am-u-sm-12" style="font-size: 12px; color: #fe5478" v-if="selectList.home">首页</div>
+    </div>
+    <div class="am-u-sm-4" @click="selectChange('cart')">
+        <div class="am-u-sm-12 img_div" v-if="!selectList.cart">
+            <img src="http://static.iishang.com/customer/images/icons/cart.png" width="20" height="20"/>
+        </div>
+        <div class="am-u-sm-12 img_div" v-if="selectList.cart">
+            <img src="http://static.iishang.com/customer/images/icons/cart_select.png" width="20" height="20"/>
+        </div>
+        <div class="am-u-sm-12" style="font-size: 12px; color:#666" v-if="!selectList.cart">购物车</div>
+        <div class="am-u-sm-12" style="font-size: 12px; color: #fe5478" v-if="selectList.cart">购物车</div>
+    </div>
+    <div class="am-u-sm-4" @click="selectChange('user')">
+        <div class="am-u-sm-12 img_div" v-if="!selectList.user">
+            <img src="http://static.iishang.com/customer/images/icons/user.png?11" width="20" height="20"/>
+        </div>
+        <div class="am-u-sm-12 img_div" v-if="selectList.user">
+            <img src="http://static.iishang.com/customer/images/icons/user_select.png" width="20" height="20"/>
+        </div>
+        <div class="am-u-sm-12" style="font-size: 12px; color:#666" v-if="!selectList.user">我的</div>
+        <div class="am-u-sm-12" style="font-size: 12px; color: #fe5478" v-if="selectList.user">我的</div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="https://dl.ntalker.com/js/xn6/ntkfstat.js?siteid=kf_9412" charset="utf-8"></script>
+
+
+
+            
+<div class="am-u-sm-12 foamModal clr5 tip_info_dlg" v-if="tip.show" style="display: block;z-index: 100007">
+    <div class="am-u-sm-12 foamModalHead am-text-center">{{tip.title}}</div>
+    <div class="am-u-sm-12 foamModalInput am-text-center">
+        <span id="tip_info">{{tip.content}} </span>
+        <div class="am-u-sm-12 cart_item am-pad-none" v-for="(item, index) in tip.items"
+        	:class="{no_border: index == tip.items.length - 1}">
+        	<div class="am-u-sm-2 am-pad-none">
+                <img :src="item.imagePath" class="cart_img" style="width: 100%" />
+            </div>
+            <div class="am-u-sm-10" style="min-height: 75px;text-align: left">
+                <div class="title">{{item.productName}}</div>
+                <div class="sku">已选 {{item.propertyName}}</div>
+                <div class="tip">{{item.statusDesc}}{{item.limitDesc}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="am-u-sm-12" v-if="tip.comfirm">
+        <a href="javascript:" @click="tipComfirmClick()" class="am-u-sm-6 foamModalBtn closeBtn clr5" style="border-radius:0;color:#555;border-right: 1px solid #ddd;">
+            确认
+        </a>
+        <a href="javascript:" @click="tip.show = false" class="am-u-sm-6 foamModalBtn closeBtn clr5" style="border-radius:0;color:#555">
+            关闭
+        </a>
+    </div>
+    <a href="javascript:" v-if="!tip.comfirm" @click="tip.show = false" class="am-u-sm-12 foamModalBtn closeBtn clr5" style="border-radius:0 0 15px 15px;color:#555">
+        关闭
+    </a>
+</div>
+<!--遮罩层-->
+<div class="foamZcc" v-if="tip.show" style="display: block;z-index: 100006"></div>
+            
+<div v-if="!subscribe.close.content">
+	<div class="am-u-sm-12 foamModal subscribe_content am-pad-none am-text-left" v-if="subscribe.status == 'FORCE'" style="border: 0">
+		<!-- <div class="foamModalHide close" @click="subscribe.close.content=true">X</div> -->
+		<div class="am-u-sm-12">
+			<br/>需要关注“爱尚鲜花”公众号才能购买<br/>
+			方法1 长按关注<br/>
+		    <div class="am-u-sm-12 am-text-center"><img :src="subscribe.qrcode" class="previewImag_total" width="50%" v-if="subscribe.qrcode" style="" /></div>
+		    <br/><br/>
+		    方法2 搜索公众号：“爱尚鲜花”，点击关注
+		    <br/><br/>
+	    </div>
+	    <a href="javascript:" onClick="hiddenTipInfo()" class="am-u-sm-12 am-pad-none foamModalBtn qdBtn" style="border-radius:0 0 15px 15px;" @click="subscribe.close.content=true">
+	        确定
+	    </a>
+	</div>
+	<div class="am-u-sm-12 foamModal subscribe_content am-pad-none" v-if="subscribe.status == 'NO_FORCE'" style="border: 0">
+		<div class="am-u-sm-12">
+			<!-- <div class="foamModalHide close" @click="subscribe.close.content=true">X</div> -->
+			<br/><br/>
+		    <img :src="subscribe.qrcode" class="previewImag_total" width="50%" v-if="subscribe.qrcode"/>
+		    <br/><br/>
+		    长按关注 爱尚鲜花
+		    <br/><br/>
+	    </div>
+	    <a href="javascript:" onClick="hiddenTipInfo()" class="am-u-sm-12 am-pad-none foamModalBtn qdBtn" style="border-radius:0 0 15px 15px;" @click="subscribe.close.content=true">
+	        确定
+	    </a>
+	</div>
+	<!--遮罩层-->
+	<div class="foamZcc" style="display: block;opacity: 0.6" v-if="subscribe.status == 'FORCE'"></div>
+</div>
+            <!-- <form modelAttribute="parameter" action="/cart/confirm.do" id="cart_form" style="display:none" method="POST">
+                <div id="parameter_ids"></div>
+                <input type="submit" />
+            </form> -->
+          </div>
+          
+        </div>
+
+        <script type="text/javascript">
+        console.log(document.referrer);
+            var lastUrl = document.referrer;
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    type: 0,//0: empty, 1: edit, 2: finish
+                    items: [],
+                    all: true,
+                    tip: {title: '提示', content: '', show: false, items:[]},
+                    list:[{"image":"http://static.iishang.com/customer/images/icons/address.png","title":"收货地址","url":"/address/myAddress.do"},{"image":"http://static.iishang.com/customer/images/icons/card.png","title":"贺卡查询","url":"/card/youwx_toMyCard.do"},{"image":"http://static.iishang.com/customer/images/icons/payRecord.png","title":"消费记录","url":"/record/toRecord.do"},{"image":"http://static.iishang.com/customer/images/icons/aboutUs.png","title":"关于我们","url":"/userCenter/youwx_toAboutUs.do"}],
+                    selectList:{'home':false,'service':false,'cart':true,'user':false},   
+                    url: lastUrl,
+                    subscribe:{
+                        status: 'NONE',
+                        qrcode: '',
+                        close: {
+                            head: false,
+                            content: true
+                        }
+                    }             
+                },
+                computed: {
+                    totalPrice: function(){
+                        var total = 0;
+                        for (var i=0; i<this.items.length; i++){//失效商品待定
+                            if (this.items[i].selected && !this.items[i].invalid) {
+                                total += this.items[i].singleAmount * this.items[i].itemCount
+                                if (this.items[i].combinationItemResources !=null && this.items[i].combinationItemResources.length
+                                 >0) {
+                                    var combinationItemResources = this.items[i].combinationItemResources;
+                                    for (var j=0;j<combinationItemResources.length;j++) {
+                                        if (combinationItemResources[j].check) {
+                                            total+=combinationItemResources[j].discountAmount*1;//combinationItemResources[j].count;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        return total;
+                    },
+                    hasBottom: function() {
+                        var lastUrl = document.referrer;
+                        console.log("last",lastUrl.indexOf("product/detail.do?"));
+                        if (lastUrl.indexOf("product/detail.do?") > 0) {
+                            return false;
+                        }
+                        return true;
+                    }
+                },
+                methods: {
+                    selectChange:function(x) {
+                        if (x == 'home') {
+                            this.selectList.home = true;
+                            this.selectList.service = false;
+                            this.selectList.cart = false;
+                            this.selectList.user = false;
+                        }else if (x == 'service') {
+                            this.selectList.home = false;
+                            this.selectList.service = true;
+                            this.selectList.cart = false;
+                            this.selectList.user = false;                   
+                        }else if (x == 'cart') {
+                            this.selectList.home = false;
+                            this.selectList.service = false;
+                            this.selectList.cart = true;
+                            this.selectList.user = false;                    
+                        }else {
+                            this.selectList.home = false;
+                            this.selectList.service = false;
+                            this.selectList.cart = false;
+                            this.selectList.user = true;                      
+                        }
+
+                        changePage(x);
+                    },                    
+                    back: function(){
+                        window.location.href = this.url;
+                    },
+                    edit: function(){
+                        var leng = 0, total = 0;
+                        for (var i=0; i<this.items.length; i++){
+                            if (this.items[i].selected){
+                                leng++;
+                            }
+                            if (this.items[i].combinationItemResources && this.items[i].combinationItemResources.length > 0){
+                                for (var k=0; k<this.items[i].combinationItemResources.length;k++){
+                                    this.items[i].combinationItemResources[k].check = this.items[i].selected
+                                    if (this.items[i].combinationItemResources[k].check){
+                                        leng++;
+                                    }
+                                    total++;
+                                }
+                            }
+                            total++;
+                        }
+                        this.all = leng == total;
+                        this.type = 2;
+                    },
+                    finish: function(){
+                        this.type = 1;
+                        var leng = 0, total = 0;
+                        for (var i=0; i<this.items.length; i++){
+                            if (this.items[i].invalid || this.items[i].status != 'NORMAL'){
+                                this.items[i].selected = false;
+                            }
+                            if (this.items[i].selected){
+                                leng++;
+                            }
+
+                            if (this.items[i].combinationItemResources && this.items[i].combinationItemResources.length > 0){
+                                for (var k=0; k<this.items[i].combinationItemResources.length;k++){
+                                    if (this.items[i].combinationItemResources[k].invalid){
+                                        this.items[i].combinationItemResources[k].check = false;
+                                    }
+                                    if (this.items[i].combinationItemResources[k].required){
+                                        this.items[i].combinationItemResources[k].check = true;
+                                    }
+                                    if (this.items[i].combinationItemResources[k].check){
+                                        leng++;
+                                    }
+                                    total++;
+                                }
+                            }
+                            total++;
+                        }
+                        this.all = leng == total;
+                    },
+                    selectedAll: function(){
+                        for (var i=0; i<this.items.length; i++){
+                            if (this.type == 2){
+                                this.items[i].selected = this.all;
+                                if (this.items[i].combinationItemResources && this.items[i].combinationItemResources.length > 0){
+                                    for (var k=0; k<this.items[i].combinationItemResources.length;k++){
+                                        this.items[i].combinationItemResources[k].check = this.all;
+                                    }
+                                }
+                            }else {
+                                if (!this.items[i].invalid)
+                                    this.items[i].selected = this.all;
+                                if (this.items[i].combinationItemResources && this.items[i].combinationItemResources.length > 0){
+                                    for (var k=0; k<this.items[i].combinationItemResources.length;k++){
+                                        if (!this.items[i].combinationItemResources[k].invalid || this.items[i].combinationItemResources[k].required){
+                                            this.items[i].combinationItemResources[k].check = this.all;
+                                        }else{
+                                            this.items[i].combinationItemResources[k].check = false;
+                                        }
+                                    }
+                                }
+                            }
+                                
+                        }
+                        this.totalPrice;
+                    },
+                    selectedItem: function(item,type){
+                        if (type != null && type == "combination") {
+
+                            var data = [];
+                            var html = "";
+                            var j = 0;
+                            for (var i=0; i<this.items.length; i++){
+                                if (this.items[i].selected){
+                                    html += '<input type="hidden" name="cartResources['+j +'].id" value="' + this.items[i].id + '">'
+                                    html += '<input type="hidden" name="cartResources['+j +'].itemCount" value="' + this.items[i].itemCount + '">'
+                                    data.push(this.items[i]);
+                                    j++;
+                                }
+                            }
+
+                            var hasProduct = false;
+                            console.log("item",item);
+                            if (this.type != 2) {
+                                for (var i = 0; i < data.length; i++) {
+                                    console.log("this.data", data[i]);
+                                    if (data[i].id == item.id) {
+                                        hasProduct = true;
+                                        break;
+                                    }
+                                }
+
+
+                                if (!hasProduct) {
+                                    showTip("提示", "加价购商品不能单独购买！", []);
+                                    item.selected = false;
+                                    for (var k = 0; k < item.combinationItemResources.length; k++) {
+                                        item.combinationItemResources[k].check = false;
+                                    }
+                                    return;
+                                }
+                            }else{
+
+                            }
+                        }else{
+                            if (item.combinationItemResources && item.combinationItemResources.length > 0){
+                                var selected = item.selected;
+                                var type = this.type;
+                                item.combinationItemResources.forEach(function(comb){
+                                    if (type == 1){
+                                        if (!comb.invalid || comb.required)
+                                            comb.check = selected;
+                                        else
+                                            comb.check = false; 
+                                    }else{
+                                        comb.check = selected; 
+                                    }
+                                });
+                            }
+                        }
+
+                        if (!item.selected){
+                            this.all = false;
+                        }else{
+                            var isall = true;
+                            for (var i=0; i<this.items.length; i++){
+                                if (!this.items[i].selected){
+                                    isall = false;
+                                    break;
+                                }
+                            }
+                            this.all = isall;
+                        }
+                        this.totalPrice;
+                    },
+                    changeCount: function(item,isAdd){
+                        console.log("item",item);
+                        if (isAdd){
+                            var count = Number(item.itemCount) + 1;
+                            if (item.limitType == 'COUNT' && count > item.limitCount){
+                                item.itemCount = item.limitCount;
+                            }else{
+                                item.itemCount = count > 999 ? 999 : count;
+                                // if (item.combinationItemResources != null && !item.invalid) {
+                                //     for (var i =0; i<item.combinationItemResources.length; i++) {
+                                //         var combination = item.combinationItemResources[i];
+                                //         combination.count = (combination.count +1)> 999 ? 999 : combination.count +1;
+                                //     }
+                                // }
+                            }
+
+                        }else{
+                            var count = Number(item.itemCount) - 1;
+                            item.itemCount = count < 1 ? 1 : count;
+
+                            // if (item.combinationItemResources != null && !item.invalid) {
+                            //     for (var i =0; i<item.combinationItemResources.length; i++) {
+                            //         var combination = item.combinationItemResources[i];
+                            //         combination.count = (combination.count -1) < 1 ? 1 : combination.count -1;
+                            //     }
+                            // }
+                        }
+
+                        if (item.gifts != null && !item.invalid) {
+                            for (var i = 0; i < item.gifts.length; i++) {
+                                var gift = item.gifts[i];
+                                gift.itemCount = item.itemCount;
+                            }
+                        }
+
+                        this.totalPrice;
+                    },
+                    checkInput: function(item){
+                        if (!String(item.itemCount).match(/^[0-9]*$/))
+                            item.itemCount = item.itemCount.replace(/[^\d*]/g,'');
+                        if (item.itemCount < 1){
+                            item.itemCount = 1;
+                        }else if (item.itemCount > item.limitBuy){
+                            item.itemCount = item.limitBuy;
+                        }else if (item.itemCount > 999){
+                            item.itemCount = 999;
+                        }
+                    },
+                    deleteItem: function(){
+                        var data = [], delData = [];
+                        for (var i=0; i<this.items.length; i++){
+                            if (!this.items[i].selected){
+                                var item = this.items[i];
+                                if (this.items[i].combinationItemResources && this.items[i].combinationItemResources.length > 0){
+                                    var combinationItemResources = []
+                                    this.items[i].combinationItemResources.forEach(function(comb){
+                                        if (comb.required || !comb.check){
+                                            combinationItemResources.push(comb);
+                                        }
+                                        if (comb.check && !comb.required){
+                                            delData.push(comb.id);
+                                        }
+                                    });
+                                    item.combinationItemResources = combinationItemResources;
+                                }
+                                data.push(item);
+                            }else{
+                                delData.push(this.items[i].id);
+                            }
+                        }
+                        delCart(data, delData);
+                    }, 
+                    confirm: function(){
+                        var data = [];
+                        var html = "";
+                        var j = 0;
+                        for (var i=0; i<this.items.length; i++){
+                            if (this.items[i].selected){
+                                html += '<input type="hidden" name="cartResources['+j +'].id" value="' + this.items[i].id + '">'
+                                html += '<input type="hidden" name="cartResources['+j +'].itemCount" value="' + this.items[i].itemCount + '">'
+                                this.items[i].channel="MOBILE";
+                                data.push(this.items[i]);
+                                j++;
+                            }
+                        }
+
+                        console.log("commitData",data);
+                        if (data.length == 0){
+                            showTip("提示", "您尚未选中要结算的商品", []);
+                        }else{
+                            $("#parameter_ids").html(html);
+                            if (this.subscribe.status == 'FORCE'){
+                                checkUserSubscribe(data);
+                            }else{
+                                validateCart(data);
+                            }
+                        }
+                        
+                    },
+                    getImageOssStyle:function(item) {
+                        return item += "?x-oss-process=style/style_short";
+                    }
+                },
+                mounted: function () {
+                    initCart();
+                    initSubscribe();
+                },
+                filters: {
+                    currency : function(value){
+                        if (value){
+                            return "¥ " + Number(value).toFixed(2);
+                        }
+                        return "¥ 0.00";
+                    }
+                }
+            });
+            
+            function changePage(page) {
+           	 if (page == 'home') {
+                    window.location = '/Yun/index.do';
+                }else if (page == 'cart') {
+                    
+                    window.location = '/Yun/cart.do';                  
+                }else {
+                    window.location = '/Yun/center.do';                      
+                }   
+           }      
+
+            function delCart(d, deld){
+                $.ajax({
+                    headers: {
+                        "Content-Type": "application/json; charset=UTF-8"
+                    },
+                    url: api_addr + "cart/item",
+                    type: "Delete",
+                    data: JSON.stringify(deld),
+                    success : function(data){
+                        if (data.status == "SUCCESS"){
+                            app.items = d;
+                            if (!app.items || app.items.length == 0){
+                                app.type = 0;
+                                app.all = false;
+                            }
+                        }else{
+                            showTip("提示", "删除商品失败", []);
+                        }
+                    }, error:function(){
+                        showTip("提示", "删除商品失败", []);
+                    }
+                });
+            }
+
+            function showTip(title, content, items){
+                app.tip.title = title;
+                app.tip.content = content;
+                app.tip.items = items;
+                app.tip.show = true;
+            }
+
+
+            function initCart() {
+                $.ajax({
+                    headers: {
+                        "Content-Type": "application/json; charset=UTF-8"
+                    },
+                    url: api_addr + "cart/item",
+                    type: "GET",
+                    success : function(data){
+                        if (data.status == "SUCCESS"){
+                            console.log("data",data);
+                            var items = data.body;
+                            app.all = true;
+                            if(items != null && items.length > 0){
+                                app.type = 1;
+                                for (var i=0; i<items.length; i++){
+                                    if (items[i].invalid || items[i].status!='NORMAL'){
+                                        app.all = false;
+                                    }
+                                    if (items[i].combinationItemResources && items[i].combinationItemResources.length > 0){
+                                        for (var k=0; k<items[i].combinationItemResources.length;k++){
+                                            items[i].combinationItemResources[k].check = items[i].selected;
+                                            if (items[i].combinationItemResources[k].invalid){
+                                                app.all = false;
+                                                items[i].combinationItemResources[k].check = false;
+                                            }
+                                            if (items[i].combinationItemResources[k].required)
+                                                items[i].combinationItemResources[k].check = items[i].selected;
+                                        }
+                                    }
+                                }
+                            }else{
+                                app.type = 0;
+                                app.all = false;
+                            }
+
+                            app.items = items;
+                        }else{
+                            app.all = false;
+                        }
+                    }
+                });
+            }
+
+        function showGoodsDetail(id) {
+            // console.log("id",id);
+            window.location = '/product/detail.do?id='+ id;
+        }
+
+            function validateCart(json){
+                var commitJson = JSON.parse(JSON.stringify(json));;
+                for (var i=0; i<commitJson.length; i++) {
+                    var resources = commitJson[i].combinationItemResources;
+                    var checkJson = [];
+                    if (resources != null) {
+                        for (var j = 0; j < resources.length; j++) {
+                            if (resources[j].check) {
+                                checkJson.push(resources[j]);
+                            }
+                        }
+                    }
+                    console.log("checkJson",checkJson);
+                    commitJson[i].combinationItemResources = checkJson;
+                }
+                console.log("json",commitJson);
+                $.ajax({
+                    headers: {
+                        "Content-Type": "application/json; charset=UTF-8"
+                    },
+                    url: api_addr + "cart/validate",
+                    type: "POST",
+                    data: JSON.stringify(commitJson),
+                    success : function(data){
+                        if (data.status == "SUCCESS"){
+                            if (data.body.success && data.body.success != null && data.body.success == true){
+                                // $("#cart_form").submit();
+                                window.location.href = "/orders/confirm.do?id=" + data.body.resourceCode;
+                            }else{
+
+                                var items = [];
+                                for (var i=0; i<data.body.cartResources.length; i++){
+                                    if (data.body.cartResources[i].statusDesc != null || data.body.cartResources[i].limitDesc != null){
+                                        items.push(data.body.cartResources[i]);
+                                    }
+                                    if (data.body.cartResources[i].combinationItemResources && data.body.cartResources[i].combinationItemResources.length> 0){
+                                        for (var j=0;j<data.body.cartResources[i].combinationItemResources.length; j++){
+                                            if (data.body.cartResources[i].combinationItemResources[j].limits && data.body.cartResources[i].combinationItemResources[j].limits.length > 0){
+                                                var json = {productName:data.body.cartResources[i].combinationItemResources[j].name, propertyName: data.body.cartResources[i].combinationItemResources[j].property,
+                                                        statusDesc: "", imagePath: data.body.cartResources[i].combinationItemResources[j].image};
+                                                for (var k=0; k<data.body.cartResources[i].combinationItemResources[j].limits.length; k++){
+                                                    if (json.statusDesc != "")
+                                                        json.statusDesc += ", ";
+                                                    json.statusDesc += data.body.cartResources[i].combinationItemResources[j].limits[k].desc;
+                                                }
+                                                items.push(json);
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                                if (items.length < 1){
+                                    showTip("提示", "你所选的商品已经下单了，如需再购买，请重新加入购物车", items);
+                                    app.$nextTick(function () {
+                                        $(".tip_info_dlg .closeBtn").click(function(){
+                                            window.location.reload();
+                                        });
+                                    });
+                                }else{
+                                    showTip("以下商品无法结算，请选择其他商品结算", "", items);
+                                }
+                            }
+                        }
+                        else{
+                            showTip("提示", "结算商品失败", []);
+                        }
+                    }, error:function(){
+                        showTip("提示", "结算商品失败", []);
+                    }
+                });
+            }
+
+            function initSubscribe(){
+                var link = window.location.pathname + window.location.search;
+                if (link.indexOf("/") == 0)
+                    link = link.substring(1);
+                var json = {link: link, type: 'SUBSCRIBE_CART'};
+                $.ajax({
+                    headers: {
+                        "Content-Type": "application/json; charset=UTF-8"
+                    },
+                    url: api_addr + "user/subscribe",
+                    type: "POST",
+                    data: JSON.stringify(json),
+                    success : function(data){
+                        if (data.status == "SUCCESS" && data.body.status != 'SHOW_SUBSCRIBE_NONE'){
+                            app.subscribe.status = data.body.status;
+                            app.subscribe.qrcode = data.body.qrcode;
+                        }
+                    }, error:function(){
+                    }
+                });
+            }
+
+            function checkUserSubscribe(json){
+                $.ajax({
+                    headers: {
+                        "Content-Type": "application/json; charset=UTF-8"
+                    },
+                    url: api_addr + "user/is_subscribe",
+                    type: "GET",
+                    success : function(data){
+                        if (data.status == "SUCCESS" && data.body){
+                            app.subscribe.status = 'NONE';
+                            app.subscribe.close.content = true;
+                            validateCart(json);
+                        }else{
+                            app.subscribe.close.content = false;
+                        }
+                    }, error:function(){
+                        app.subscribe.close.content = false;
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>

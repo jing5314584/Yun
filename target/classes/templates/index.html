@@ -1,17 +1,614 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>index.html</title>
-	
-    <meta name="keywords" content="keyword1,keyword2,keyword3">
-    <meta name="description" content="this is my page">
-    <meta name="content-type" content="text/html; charset=UTF-8">
-    
-    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<html class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <title>花语</title>
+    <meta name="x5-orientation" content="portrait">
+   
 
-  </head>
-  
-  <body>
-    This is my HTML page. <br>
-  </body>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,viewport-fit=cover">
+<meta name="renderer" content="webkit">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<meta name="x5-orientation" content="portrait">
+<link rel="shortcut icon" href="/images/app.jpg"
+	type="image/x-icon">
+<link rel="stylesheet" href="/css/amazeui.min.css">
+
+
+
+<link rel="stylesheet" href="/css/app.min.2.0.css">
+<link rel="stylesheet" href="/css/redeem.css">
+<link rel="stylesheet" href="/css/fightgroup.css" type="text/css"></link>
+
+<link rel="stylesheet" href="/css/index.css" type="text/css"></link>
+<style type="text/css">
+   
+
+</style>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/amazeui.min.js"></script>
+<script src="/js/jweixin-1.0.0.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="/css/confirm.css?">
+    <style>
+        body{
+            font-family: 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .main_visual {
+            position: relative;
+            z-index: 23;
+            min-width: 320px;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .main_image {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0 auto;
+            position: relative
+        }
+
+        .main_image ul {
+            width: 9999px;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0
+        }
+
+        .main_image li {
+            float: left;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .main_image li span {
+            display: block;
+            width: 100%;
+            height: 100%
+        }
+
+        .main_image li img {
+            display: block;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .main_image li a {
+            display: block;
+            width: 100%;
+            height: 100%
+        }
+
+        div.flicking_con {
+            width: 100%;
+            height: 11px;
+            position: absolute;
+            z-index: 1;
+            bottom: 10px;
+            text-align: center;
+        }
+
+        div.flicking_con li {
+            font-size: 0;
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            border: 1px solid #fff;
+            background: #fff;
+            margin: 0 5px;
+            vertical-align: top;
+            overflow: hidden;
+        }
+
+        div.flicking_con li.on {
+            border: 1px solid #b9c8de;
+            background: #b9c8de;
+        }
+
+        .v2-header {
+            background: #ffffff;
+            height: 40px;
+            max-width: 640px;
+            opacity: 0.85;
+            /*padding-top: 4px;*/
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: -1;
+        }
+        .v2-header_bg{
+            z-index: 1000;
+            position: absolute;
+            background: transparent;
+            height: 40px;
+            width: 100%;
+        }
+
+        .v2-category-wrapper {
+            padding-top: 15px;
+        }
+
+        .v2-category {
+            min-height: 82px;
+        }
+
+        .v2-category-font {
+            color: #666666;
+            font-size: 14px;
+            padding-top: 10px;
+        }
+
+        .userFootBar {
+            background-color: #fff;
+            border-top: 1px solid #f2f2f2;
+            bottom: 0;
+            height: 45px;
+            position: fixed;
+            width: 100%;
+            text-align: center;
+            max-width: 640px;
+        }
+
+        .posrelative:after, .v2-customer-bg:after,
+        .v2-product-detail-double:after, .v2-product-detail-single:after{
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .v2-home-line{
+            padding-top: 30px;
+            border-bottom: 1px solid #f2f2f2;
+            height: 1px;
+            width: 100%;
+        }
+
+        .v2-product-name{
+            color: #000000;
+            font-size: 20px;
+            /*font-weight: 100;*/
+            padding: 15px;
+            line-height: 18px;
+        }
+
+        .v2-product-line{
+            /*margin: auto;*/
+            /*padding-top: 4px;*/
+            border-bottom: 1px solid #f2f2f2;
+            height: 1px;
+            /*width: 50%;*/
+            margin-bottom: 15px;
+        }
+
+        .v2-product-detail-single{
+            border-radius: 5px;
+            border: 1px solid #dddddd;
+            min-height: 110px;
+            /*padding-bottom: 10px;*/
+        }
+
+        .v2-product-detail-double{
+            border-radius: 5px;
+            border: 1px solid #dddddd;
+            padding-bottom: 10px;
+            min-height: 126px;
+        }
+        .v2-product-detail-single img{
+            border-radius: 4px;
+        }
+        .v2-product-detail-double img{
+            border-radius: 4px 4px 0 0;
+        }
+        
+
+        .v2-clean{
+            clear:both;
+        }
+        .v2-split-bg {
+            background-color: #fafafa;
+            height: 30px;
+            border-top:1px solid #f2f2f2;
+            border-bottom: 1px solid #f2f2f2;
+        }
+        .v2-customer-bg{
+            background: #fafafa;
+            padding: 15px 0;
+            border-top: 1px solid #f2f2f2;
+            border-bottom: 1px solid #f2f2f2;
+            clear:both;
+        }
+        .v2-title-start{
+            width:11px;
+            margin-right:6px;
+            border-top:1px solid #ddd;
+            border-bottom:1px solid #ddd;
+            height: 21px;
+            padding:0;
+        }
+        .v2-title-start div{
+            height: 1px;
+            border-top: 1px solid #bbb;
+            width:100%;
+            margin-top: 9px;
+        }
+        .v2-more{
+            margin-right: 0;
+            background: url('http://static.iishang.com/customer/images/icons/back.png') 100% 50% no-repeat;
+            transform: rotate(180deg);
+            background-size: auto 20px;
+            background-position-x: 10%;
+        }
+        .am-u-sm-6{
+            width: 50% !important;
+        }
+        .v2-btm{
+            position:absolute; 
+            bottom: 0; 
+            left:0; 
+            right: 0;
+            color: #fff;
+            font-size: 16px;
+            /*font-weight: 300;*/
+            height: 40px;
+            overflow: hidden;
+            padding-left: 6px;
+            z-index: 11;
+        }
+        .v2-btm-opacity{
+            opacity: 0.5;
+            background: #000;
+            z-index: 10;
+        }
+        .v2-large-h{
+            height: 68px;
+            padding-left: 20px;
+        }
+        .v2-small-h{
+            height: 40px;
+            padding: 0 5px;
+            font-size: 12px;
+            line-height: 40px;
+        }
+        .ellipsis_line{
+            overflow:hidden;
+            text-overflow:ellipsis;
+            width: 60%;
+            display: inline-block;
+        }
+        .wrapper-container{
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            padding-left: 15px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+            -webkit-overflow-scrolling: touch;
+            display: -webkit-flex;
+            display: flex;  
+        }
+
+        .wrapper-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .wrapper{
+            position: relative;
+            height: 100%;
+            z-index: 1;
+       }
+        .wrapper-slide{
+            -webkit-flex-shrink: 0;
+            -ms-flex: 0 0 auto;
+            flex-shrink: 0;
+            width: 140px;
+            height: 100%;
+            position: relative;
+            display: block;
+            margin-right: 15px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            -webkit-overflow-scrolling: touch;
+        }
+        .wrapper-slide img{
+            border-radius: 4px;
+        }
+        .v2-btm-opacity{
+            border-radius: 0 0 4px 4px;
+        }
+        .lighter{
+            font-weight: 300;
+        }
+        .split_space_single{
+            margin-bottom: 30px;
+        }
+        .split_space_double{
+            margin-bottom: 15px;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        .split_space_double .container{
+            padding-right: 8px;
+            padding-left: 15px;
+        }
+        .split_space_double .container1{
+            padding-left: 8px;
+            padding-right: 15px;
+        }
+        .v2-left-right{
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        .lighter {
+            font-weight: 300;
+        }
+
+    </style>
+    <script type="text/javascript" src="/js/vue.min.js"></script>
+
+</head>
+<body>
+<div id="app" class="index">
+    <div v-cloak>
+       <!--  <header class="am-g v2-header_bg">
+            <div class="am-u-sm-12" style="position: relative;border-bottom: 1px solid #ddd;height: 40px;line-height: 40px;text-align: center;">
+                <div class="am-u-sm-12 am-pad-none">
+                    <img src="http://static.iishang.com/customer/images/v2/logo.png" width="100">
+                </div>
+                <div class="v2-header"></div>
+            </div>
+        </header> -->
+
+        <div class="am-g">
+
+            <!-- slide Start -->
+				<div id="scwrapper">
+					<div class="main_visual" id="swiper_wrapper">
+						<div class="flicking_con hd">
+							<ul></ul>
+						</div>
+						<div class="main_image bd">
+							<div class="tempWrap">
+
+								<ul id="slides">
+									<li v-for="(item, index) in slides"><a
+										:href="item.target"><img :src="item.path"></a></li>
+								</ul>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<img alt="" src="/images/pinzhi.jpg" width="100%">
+            <div class="outer_pic">
+					<a :href="item.url" class="one_product" v-for="(item, index) in product" >
+								<span class="getnum"><span>3</span>人团</span><img
+									:src="item.goodsImg"
+									alt="">
+								<div class="flower_detail_wap">
+									<span class="flower_price"><b>￥</b><span>{{item.groupPrice}}</span> /束</span><span
+										class="old_price">单买价￥<span>{{item.singlePrice}}</span></span><!-- <span
+										class="time_over">还剩 <span class="day">7</span>天<span
+										class="hour">22</span>时 <span class="minite">57</span>分 <span
+										class="second">13</span>秒
+									</span> -->
+								</div>
+								
+									<p class="title">{{item.goodsName}}</p>
+									<p class="p_content">{{item.goodsBrief}}</p>
+									<div class="but"><img
+											src="/images/cart.png">去拼团</div>
+							</a>
+				</div>
+           
+            <!--sections end -->
+
+            <!-- 版权信息 -->
+            <!-- <div class="am-u-sm-12 am-text-left v2-customer-bg" style="padding: 25px 5px 40px 26px;font-size: 11px;color: #999;margin-top:0">
+                <div class="am-u-sm-4 am-text-right">
+                    <img src="http://static.iishang.com/customer/images/icons/logo_gray.png" width="100" style="margin-top: 5px;">
+                </div>
+                <div class="am-u-sm-8 am-text-left" style="line-height: 20px;">
+                    上海爱尚鲜花股份有限公司 版权所有<br/>
+                    400-6000720
+                </div>
+            </div>
+
+        </div> -->
+        <div style="height: 45px;clear:both;"></div>
+
+        
+
+<div class="am-u-sm-12 userFootBar" style="padding-top: 3px;z-index: 200">
+    <div class="am-u-sm-6" @click="selectChange('home')">
+        <div class="am-u-sm-12 img_div" v-if="!selectList.home">
+            <img src="http://static.iishang.com/customer/images/icons/home.png" width="20" height="20"/>
+        </div>
+        <div class="am-u-sm-12 img_div" v-show="selectList.home">
+            <img src="http://static.iishang.com/customer/images/icons/home_select.png" width="20" height="20"/>
+        </div>
+        <div class="am-u-sm-12" style="font-size: 12px; color:#666" v-if="!selectList.home">首页</div>
+        <div class="am-u-sm-12" style="font-size: 12px; color: #fe5478" v-if="selectList.home">首页</div>
+    </div>
+    
+    <div class="am-u-sm-6" @click="selectChange('user')">
+        <div class="am-u-sm-12 img_div" v-if="!selectList.user">
+            <img src="http://static.iishang.com/customer/images/icons/user.png?11" width="20" height="20"/>
+        </div>
+        <div class="am-u-sm-12 img_div" v-if="selectList.user">
+            <img src="http://static.iishang.com/customer/images/icons/user_select.png" width="20" height="20"/>
+        </div>
+        <div class="am-u-sm-12" style="font-size: 12px; color:#666" v-if="!selectList.user">我的</div>
+        <div class="am-u-sm-12" style="font-size: 12px; color: #fe5478" v-if="selectList.user">我的</div>
+    </div>
+</div>
+
+<!-- ios浏览器打不开小能,按小能技术body里在引入一遍js -->
+</div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript"
+            src="/js/TouchSlide.1.1.source.js"></script>
+<script type="text/javascript">
+    var host = "";
+    var homeResource = {"categories":[{
+    	"name":"订阅惊喜",
+    	"path":"http://resource.iishang.com/home/category/c4a0dc71-2e7a-4877-a2f1-7719acebc244.gif",
+    	"target":"http://m.iishang.com/page/56325216"
+    	},{
+    		"name":"极速送花","path":"http://resource.iishang.com/home/category/1556cd26-ac68-4be9-aa44-e1e26812e29f.gif",
+    		"target":"http://m.iishang.com/page/73237955"
+    		},{
+    			"name":"永生花礼","path":"http://resource.iishang.com/home/category/dd2258f9-a63e-45b8-9694-edbcaeeb51d4.gif",
+    			"target":"http://m.iishang.com/page/57017328"
+    		},{
+    			"name":"花边小物","path":"http://resource.iishang.com/home/category/838e8f10-f271-44db-8f05-47a5dfab6f68.gif",
+    			"target":"http://m.iishang.com/product/list.do?category=&type=NORMAL&id=5"
+    					}],
+    				"sections":[{
+    					"id":1,
+    					"name":"限时抢购",
+    					"products":[{
+    						"link":"http://m.iishang.com/product/detail.do?id=12000930",
+    								"name":"【母亲节进口款】幸福时光",
+    								"oriAmount":"299.00",
+    								"right":false,
+    								"showAmount":"199.00",
+    								"showImage":"http://resource.iishang.com/home/product/32456da1-5b22-41e1-85d5-1487d43f6402.jpg",
+    								"soldOut":false,
+    								"sort":1,
+    								"style":"SINGLE"
+    								},{
+    									"link":"http://m.iishang.com/product/detail.do?id=12000929",
+    											"name":"【母亲节国产款】致美丽的你",
+    											"oriAmount":"199.00","right":false,
+    											"showAmount":"89.90",
+    											"showImage":"http://resource.iishang.com/home/product/75aa1d2c-3fad-4532-a34e-5693c13f279b.jpg",
+    											"soldOut":false,
+    											"sort":2,
+    											"style":"SINGLE"
+    									},{
+    										"link":"http://m.iishang.com/product/detail.do?id=12000936","name":"【520国产款】毕生所爱","oriAmount":"199.00","right":false,"showAmount":"89.90","showImage":"http://resource.iishang.com/home/product/675dc25c-80db-4f0d-9f49-d04485d899ae.jpg","soldOut":false,"sort":3,"style":"SINGLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000937","name":"【520进口款】爱的甜蜜","oriAmount":"299.00","right":false,"showAmount":"199.00","showImage":"http://resource.iishang.com/home/product/102a4f30-20c1-46bc-b5d4-56324a411251.jpg","soldOut":false,"sort":4,"style":"SINGLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000862","name":"为爱而来—非洲进口玫瑰系列","oriAmount":"399.00","right":false,"showAmount":"369.00","showImage":"http://resource.iishang.com/home/product/4ed80243-6158-4d72-a26d-8cc76b523367.jpg","soldOut":false,"sort":6,"style":"SINGLE"}],"right":true,"sort":1,"type":"GROUP"},{"id":2,"name":"订阅惊喜","products":[{"link":"http://m.iishang.com/product/detail.do?id=12000919","name":"纯真单品鲜花系列","productId":"12000919","right":false,"showAmount":"99.00","showImage":"http://resource.iishang.com/home/product/cd228a5d-ddc9-49ec-a55c-9a2d850f61db.jpg","soldOut":false,"sort":1,"style":"SINGLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000862","name":"为爱而来—非洲进口玫瑰系列","productId":"12000862","right":false,"showAmount":"99.90","showImage":"http://resource.iishang.com/home/product/72fe87ab-6abb-488f-9633-f43255c3b718.jpg","soldOut":false,"sort":2,"style":"SINGLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000759","name":"花漾盛宴鲜花系列","oriAmount":"306.00","right":false,"showAmount":"189.00","showImage":"http://resource.iishang.com/home/product/b3b35769-1833-4f27-9aaa-955cf1c4dfcc.jpg","soldOut":false,"sort":3,"style":"SINGLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000823","name":"轻奢甄选鲜花系列","productId":"12000823","right":false,"showAmount":"119.00","showImage":"http://resource.iishang.com/home/product/b9bf0eaf-82d3-48ba-94e1-9681c9cbe922.jpg","soldOut":false,"sort":6,"style":"SINGLE"}],"right":true,"sort":2,"type":"NORMAL"},{"id":3,"name":"单束花礼","products":[{"link":"http://m.iishang.com/product/detail.do?id=12000930","name":"【母亲节进口款】幸福时光","productId":"12000930","right":false,"showAmount":"199.00","showImage":"http://resource.iishang.com/home/product/2c430161-9812-47ee-b95e-7c94b342939e.jpg","soldOut":true,"sort":1,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000929","name":"【母亲节国产款】致美丽的你","productId":"12000929","right":true,"showAmount":"89.90","showImage":"http://resource.iishang.com/home/product/0e53c429-61ba-4d79-a1d1-83ef47e11590.jpg","soldOut":false,"sort":2,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000937","name":"【520进口款】爱的甜蜜","productId":"12000937","right":false,"showAmount":"199.00","showImage":"http://resource.iishang.com/home/product/7ca363c4-2f68-47e0-a398-ad20297ae006.jpg","soldOut":false,"sort":3,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000936","name":"【520国产款】毕生所爱","productId":"12000936","right":true,"showAmount":"89.90","showImage":"http://resource.iishang.com/home/product/98c87ac4-5a37-4dee-ae91-fc0fb71ce373.jpg","soldOut":false,"sort":4,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000706","name":"【送TA】33枝玫瑰系列","productId":"12000706","right":false,"showAmount":"199.00","showImage":"http://flower2.oss-cn-hangzhou.aliyuncs.com/youwx/images/homepage/product/BC01786E7ECAD9B352A54A57D98C6912.jpg","soldOut":false,"sort":5,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000666","name":"【送长辈】感恩&关怀款","productId":"12000666","right":true,"showAmount":"169.00","showImage":"http://flower2.oss-cn-hangzhou.aliyuncs.com/youwx/images/homepage/product/14.jpg","soldOut":false,"sort":6,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000665","name":"【送TA】19枝玫瑰款","productId":"12000665","right":false,"showAmount":"169.00","showImage":"http://flower2.oss-cn-hangzhou.aliyuncs.com/youwx/images/homepage/product/15.jpg","soldOut":false,"sort":7,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000671","name":"【送TA】明艳雪山&情迷戴安娜","productId":"12000671","right":true,"showAmount":"169.00","showImage":"http://flower2.oss-cn-hangzhou.aliyuncs.com/youwx/images/homepage/product/16.jpg","soldOut":false,"sort":8,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000808","name":"【新品】一篮春色","productId":"12000808","right":false,"showAmount":"299.00","showImage":"http://resource.iishang.com/home/product/bd7dbdc5-41e9-4e06-a547-5bcaaee366f9.jpg","soldOut":false,"sort":9,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000685","name":"[星座花礼]星座鲜花-射手座","productId":"12000685","right":true,"showAmount":"269.00","showImage":"http://resource.iishang.com/home/product/0100153e-6807-41c2-93f0-688b0777bf08.jpg","soldOut":false,"sort":10,"style":"DOUBLE"}],"right":true,"sort":3,"type":"NORMAL"},{"id":4,"name":"永生花礼","products":[{"link":"http://m.iishang.com/product/detail.do?id=12000673","name":"【永生花】爱的抱抱&秘密花园","productId":"12000673","right":false,"showAmount":"199.00","showImage":"http://flower2.oss-cn-hangzhou.aliyuncs.com/youwx/images/homepage/product/17.jpg","soldOut":false,"sort":0,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000698","name":"【永生花】星座永生花","productId":"12000698","right":true,"showAmount":"279.00","showImage":"http://flower2.oss-cn-hangzhou.aliyuncs.com/youwx/images/homepage/product/18.jpg","soldOut":false,"sort":1,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000870","name":"【新年迎福】小财神","productId":"12000870","right":false,"showAmount":"399.00","showImage":"http://resource.iishang.com/home/product/4bbe5d60-88b4-4927-b62e-1db425afd8b3.jpg","soldOut":false,"sort":2,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000740","name":"【永生花】星光如梦","productId":"12000740","right":true,"showAmount":"279.00","showImage":"http://resource.iishang.com/home/product/554e593d-23e1-46cb-8b4b-34626634f322.jpg","soldOut":false,"sort":4,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000678","name":"进口永生花音乐盒","productId":"12000678","right":false,"showAmount":"199.00","showImage":"http://resource.iishang.com/home/product/928b8568-9d93-4b59-96b9-9796a17ca1fa.jpg","soldOut":true,"sort":5,"style":"DOUBLE"}],"right":true,"sort":4,"type":"NORMAL"},{"id":5,"name":"花边小物","products":[{"link":"http://m.iishang.com/product/detail.do?id=12000724","name":"花瓶+花袋组合","oriAmount":"99.00","right":false,"showAmount":"40.00","showImage":"http://resource.iishang.com/home/product/f78b4546-9d0b-4d21-8af0-0e3a25ede115.jpg","soldOut":false,"sort":1,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000923","name":"Victoria花瓶","productId":"12000923","right":true,"showAmount":"109.00","showImage":"http://resource.iishang.com/home/product/67eb1ab6-83ec-451a-82b2-2a54eb249650.jpg","soldOut":false,"sort":2,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000683","name":"日本坂源花剪","productId":"12000683","right":false,"showAmount":"139.00","showImage":"http://resource.iishang.com/home/product/87efb962-3235-4519-9ff7-174d0f5b9efd.jpg","soldOut":false,"sort":3,"style":"DOUBLE"},{"link":"http://m.iishang.com/product/detail.do?id=12000940","name":"爱尚花瓶集锦","productId":"12000940","right":true,"showAmount":"35.00","showImage":"http://flower2.oss-cn-hangzhou.aliyuncs.com/youwx/images/homepage/product/21.jpg","soldOut":false,"sort":4,"style":"DOUBLE"}],"right":true,"sort":5,"type":"NORMAL"}],
+    										};
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            selectList: {'home': true, 'service': false, 'cart': false, 'user': false},
+            slides:[],
+            product:[]
+           
+        },
+        computed: {
+
+        },
+        created:function(){
+        	initSlides(this);
+        	initProductData(this);
+         },
+        methods: {
+            initSlide: function () {
+                TouchSlide({
+                    slideCell: "#swiper_wrapper",
+                    titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+                    mainCell: ".bd ul",
+                    effect: "leftLoop",
+                    autoPlay: true,//自动播放
+                    autoPage: true, //自动分页
+                    switchLoad: "_src" //切换加载，真实图片路径为"_src"
+                });
+            },
+            selectChange: function (x) {
+                if (x == 'home') {
+                    this.selectList.home = true;
+                    this.selectList.service = false;
+                    this.selectList.cart = false;
+                    this.selectList.user = false;
+                } else if (x == 'service') {
+                    this.selectList.home = false;
+                    this.selectList.service = true;
+                    this.selectList.cart = false;
+                    this.selectList.user = false;
+                } else if (x == 'cart') {
+                    this.selectList.home = false;
+                    this.selectList.service = false;
+                    this.selectList.cart = true;
+                    this.selectList.user = false;
+                } else {
+                    this.selectList.home = false;
+                    this.selectList.service = false;
+                    this.selectList.cart = false;
+                    this.selectList.user = true;
+                }
+                changePage(x);
+            }
+        },
+        mounted: function () {
+            
+            /* initSlides(this); */
+            this.initSlide();
+        },
+        filters: {
+        }
+
+    });
+
+    function changePage(page) {
+    	 if (page == 'home') {
+             window.location = '/Yun/index.html';
+         }else {
+             window.location = '/Yun/center.html';                      
+         }   
+    }
+    function initSlides(obj) {
+        $.ajax({
+            url: "Slides",
+            type: "POST",
+            data: {},
+            async: false,
+            success: function (data) {
+                var t = JSON.parse(data);
+                $.each(t, function(i, item) {
+                	 /* $("#slides").append( "<li>"+
+                     	"<a href=\""+item.linkUrl+"\"><img src=\""+item.image+"\"></a>"+
+                     "</li>"); */
+                	obj.slides.push({"path":item.image,"sort":1,"target":item.linkUrl});
+                	
+                });
+            }
+        });
+    }
+    function initProductData(obj) {
+        $.ajax({
+            url: "GetProducts",
+            type: "POST",
+            data: {},
+            async: false,
+            success: function (data) {
+                var t = JSON.parse(data);
+                	
+                console.log("GetProducts",t.goods);
+                obj.product = t.goods;
+                console.log("GetProducts",obj.product);
+            }
+        });
+    }
+</script>
 </html>
